@@ -1,6 +1,7 @@
 .header{
     display: flex;
     margin-top: 20px;
+    padding-bottom: 100px;
 }
 
 .header__icon{
@@ -9,10 +10,11 @@
 
 .header__list{
     display: flex;
-    align-items: center;
+    align-items: end;
 }
 
 .header__item{
+    margin-bottom: 1px;
     &:first-child{
         margin-right: 60px;
     }
@@ -24,8 +26,130 @@
 
 .header__form{
     display: flex;
+    float: bottom;
+    width: 288px;
+    margin-right: 172px;
+}
+
+.header__switch{
+    margin: 0 12px 5px 12px;
+}
+
+.header__bg{
+    display: flex;
+    align-items: end;
+    margin-bottom: 5px;
+}
+
+.header__light{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: $main-orange;
+}
+
+.header__dark{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.switch input {
+    display: none;
+}
+
+.switch {
+    display: inline-block;
+    width: 40px;
+    /*=w*/
+    height: 20px;
+    /*=h*/
+    margin: 4px;
+    transform: translateY(50%);
+    position: relative;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 30px;
+    box-shadow: 0 0 0 2px $main-orange, 0 0 4px $main-orange;
+    cursor: pointer;
+    border: 4px solid transparent;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: $main-orange;
+    border-radius: 30px;
+    transform: translateX(-20px);
+    /*translateX(-(w-h))*/
+    transition: 0.2s;
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+    /*translateX(w-h)*/
+    background-color: $main-orange;
+}
+
+input:checked+.slider {
+    box-shadow: 0 0 0 2px $main-orange, 0 0 8px $main-orange;
+}
+
+.switch200 .slider:before {
+    width: 200%;
+    transform: translateX(-82px);
+    /*translateX(-(w-h))*/
+}
+
+.a {
+    display: flex;
     align-items: flex-end;
 }
 
+.b {
+    width: 248px;
+    height: 40px;
+    padding-left: 10px;
+    border: 1px solid $main-orange;
+    border-radius: 0 5px 5px 0;
+    outline: none;
+    background: $bg-light;
+    color: $bg-dark;
+    margin-right: 172px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+}
 
+.c {
+    width: 40px;
+    height: 40px;
+    border: 1px solid $main-orange;
+    background: $bg-light;
+    border-radius: 5px 0 0 5px;
+    cursor: pointer;
+}
+
+.c:before {
+    margin: auto;
+    font-size: 16px;
+    color: $main-orange;
+}
 
