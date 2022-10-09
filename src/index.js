@@ -66,5 +66,5 @@ function getFavoriteBtn(id) {
     : `<button id="${id}" data-add-favorite>Add to</button><button id="${id}" class="is-hidden" data-remove-favorite>Remove</button> `;
 }
 
-showFavoritesCoctails().then();
+// showFavoritesCoctails().then();
 
