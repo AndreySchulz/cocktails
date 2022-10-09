@@ -2,6 +2,7 @@ import { Notify } from 'notiflix';
 import { searchCoctails, searchByFirstLetter } from './helpers/api';
 import { getAlphabetMarkup } from './helpers/helpers';
 import { addCoctailToFavorites, isCoctailFavorites, removeCoctailFromFavorites } from './js/favorites';
+import { showFavoritesCoctails } from './js/favorites-cards';
 
 const searchForm = document.querySelector('#form');
 const searchField = document.querySelector('#input');
@@ -48,16 +49,22 @@ gallery.addEventListener('click', event => {
   const addBtn = event.target.closest('[data-add-favorite]');
   if (addBtn) {
     addCoctailToFavorites(addBtn.id);
+    addBtn.classList.add('is-hidden');
+    addBtn.parentNode.querySelector('[data-remove-favorite]').classList.remove('is-hidden');
   }
   const removeBtn = event.target.closest('[data-remove-favorite]');
   if (removeBtn) {
     removeCoctailFromFavorites(removeBtn.id);
+    removeBtn.classList.add('is-hidden');
+    removeBtn.parentNode.querySelector('[data-add-favorite]').classList.remove('is-hidden');
   }
 });
 
 function getFavoriteBtn(id) {
   return isCoctailFavorites(id)
-    ? `<button id="${id}" data-remove-favorite>Remove</button>`
-    : `<button id="${id}" data-add-favorite>Add to</button>`;
+    ? `<button id="${id}" data-remove-favorite>Remove</button><button id="${id}" class="is-hidden" data-add-favorite>Add to</button>`
+    : `<button id="${id}" data-add-favorite>Add to</button><button id="${id}" class="is-hidden" data-remove-favorite>Remove</button> `;
 }
+
+// showFavoritesCoctails().then();
 
