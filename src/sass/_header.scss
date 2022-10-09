@@ -1,0 +1,31 @@
+.header{
+    display: flex;
+    margin-top: 20px;
+}
+
+.header__icon{
+    margin-right: 43px;
+}
+
+.header__list{
+    display: flex;
+    align-items: center;
+}
+
+.header__item{
+    &:first-child{
+        margin-right: 60px;
+    }
+
+    &:last-child{
+        margin-right: 251px;
+    }
+}
+
+.header__form{
+    display: flex;
+    align-items: flex-end;
+}
+
+
+
