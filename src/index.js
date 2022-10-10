@@ -1,8 +1,9 @@
 import { Notify } from 'notiflix';
-import { searchCoctails, searchByFirstLetter } from './helpers/api';
+import { searchCocktails, searchByFirstLetter } from './helpers/api';
 import { getAlphabetMarkup } from './helpers/helpers';
-import { addCoctailToFavorites, isCoctailFavorites, removeCoctailFromFavorites } from './js/favorites';
-import { showFavoritesCoctails } from './js/favorites-cards';
+import { addCocktailToFavorites, isCocktailFavorites, removeCocktailFromFavorites } from './js/favorites';
+import { showFavoritesCocktails } from './js/favorites-cards';
+import { renderCocktailCard } from './js/coctail-modal';
 
 const searchForm = document.querySelector('#form');
 const searchField = document.querySelector('#input');
@@ -16,15 +17,15 @@ getAlphabetMarkup(alphabetUl);
 
 searchForm.addEventListener('submit', async event => {
   event.preventDefault();
-  const coctailName = searchField.value.trim();
-  if (coctailName === '') {
-    Notify.info('Please enter the name of your coctail');
+  const cocktailName = searchField.value.trim();
+  if (cocktailName === '') {
+    Notify.info('Please enter the name of your cocktail');
     return;
   }
-  const drinks = await searchCoctails(coctailName);
+  const drinks = await searchCocktails(cocktailName);
 
   const template = drinks.map(({ idDrink, strDrink, strDrinkThumb }) => {
-    return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button>Learn more</button>${getFavoriteBtn(
+    return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button id="${idDrink}" data-details>Learn more</button>${getFavoriteBtn(
       idDrink
     )}</a></li>`;
   });
@@ -37,7 +38,7 @@ alphabetUl.addEventListener('click', async event => {
     const drinks = await searchByFirstLetter(resultLetter);
 
     const template = drinks.map(({ idDrink, strDrink, strDrinkThumb }) => {
-      return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button>Learn more</button>${getFavoriteBtn(
+      return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button id="${idDrink}" data-details>Learn more</button>${getFavoriteBtn(
         idDrink
       )}</a></li>`;
     });
@@ -45,26 +46,30 @@ alphabetUl.addEventListener('click', async event => {
   }
 });
 
-gallery.addEventListener('click', event => {
+gallery.addEventListener('click', async event => {
   const addBtn = event.target.closest('[data-add-favorite]');
   if (addBtn) {
-    addCoctailToFavorites(addBtn.id);
+    addCocktailToFavorites(addBtn.id);
     addBtn.classList.add('is-hidden');
     addBtn.parentNode.querySelector('[data-remove-favorite]').classList.remove('is-hidden');
   }
   const removeBtn = event.target.closest('[data-remove-favorite]');
   if (removeBtn) {
-    removeCoctailFromFavorites(removeBtn.id);
+    removeCocktailFromFavorites(removeBtn.id);
     removeBtn.classList.add('is-hidden');
     removeBtn.parentNode.querySelector('[data-add-favorite]').classList.remove('is-hidden');
+  }
+  const detailsBtn = event.target.closest('[data-details]');
+  if (detailsBtn) {
+    await renderCocktailCard(detailsBtn.id);
   }
 });
 
 function getFavoriteBtn(id) {
-  return isCoctailFavorites(id)
+  return isCocktailFavorites(id)
     ? `<button id="${id}" data-remove-favorite>Remove</button><button id="${id}" class="is-hidden" data-add-favorite>Add to</button>`
-    : `<button id="${id}" data-add-favorite>Add to</button><button id="${id}" class="is-hidden" data-remove-favorite>Remove</button> `;
+    : `<button id="${id}" data-add-favorite>Add to</button><button id="${id}" class="is-hidden" data-remove-favorite>Remove</button>`;
 }
 
-// showFavoritesCoctails().then();
+// showFavoritesCocktails().then();
 

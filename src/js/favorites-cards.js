@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getFavoriteCoctails } from './favorites';
+import { getFavoriteCocktails } from './favorites';
 
 async function searchById(id) {
   try {
@@ -12,10 +12,10 @@ async function searchById(id) {
   }
 }
 
-async function showFavoritesCoctails() {
-  let list = await Promise.all(getFavoriteCoctails().map(id => searchById(id)));
+async function showFavoritesCocktails() {
+  let list = await Promise.all(getFavoriteCocktails().map(id => searchById(id)));
   list = list.filter(item => item);
   console.log(list);
 }
 
-export { showFavoritesCoctails };
+export { showFavoritesCocktails, searchById };
