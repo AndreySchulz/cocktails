@@ -1,9 +1,7 @@
-import axios from 'axios';
-import { searchById } from './favorites-cards';
+import { searchById } from './helpers/api';
 import { renderIngredientCard } from './ingredients-modal';
 import {
   addCocktailToFavorites,
-  isCocktailFavorites,
   removeCocktailFromFavorites,
   getCocktailFavoriteBtn,
 } from './favorites';

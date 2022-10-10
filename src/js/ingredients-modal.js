@@ -1,11 +1,10 @@
-import axios from 'axios';
 import {
   addIngredientsFavorites,
-  isIngredientsFavorites,
   removeIngredientsFromFavorites,
   getIngredientFavoriteBtn,
 } from './favorites';
 import { createOnClickForModal } from './modal';
+import { searchIngredientByName, searchById } from './helpers/api';
 
 const modalIngredientContent = document.querySelector(
   '.modal-ingredient__content'
@@ -19,16 +18,7 @@ const onClickModal = createOnClickForModal(
 
 backDrop.addEventListener('click', onClickModal);
 
-async function searchIngredientByName(ingredient) {
-  try {
-    const response = await axios.get(
-      `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${ingredient}`
-    );
-    return response.data.ingredients[0];
-  } catch (error) {
-    return null;
-  }
-}
+
 
 // async function showFavoritesIngredient() {
 //     let list = await Promise.all(getFavoriteCocktails().map(id => searchById(id)));
@@ -62,4 +52,15 @@ async function renderIngredientCard(ingredient) {
   backDrop.classList.remove('is-hidden');
 }
 
-export { renderIngredientCard };
+function getIngredientsMarkup(ingredients) {
+  return ingredients.map(
+    ({ idIngredient, strIngredient, strType }) => `
+    <h2 class="content__title">${strIngredient}</h2>
+    <h3 class="content__subtitle">${strType}</h3>
+    <button id="${strIngredient}" class="gallery__button" data-ingredient-details>Learn more</button>
+    ${getIngredientFavoriteBtn(idIngredient)}
+`
+  );
+}
+
+export { renderIngredientCard, getIngredientsMarkup };
