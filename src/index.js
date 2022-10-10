@@ -33,7 +33,7 @@ searchForm.addEventListener('submit', async event => {
   } else {
   const template = getDrinksMarkup(drinks);
 
-  gallery.innerHTML = template.join('');
+  gallery.innerHTML = `<h2>Searching results</h2>${template.join('')}`;
 }
 });
 
@@ -75,7 +75,7 @@ gallery.addEventListener('click', async event => {
 const getRandomCoctails = async () => {
     const randomCocktails = await searchRandom();
     const template = getDrinksMarkup(randomCocktails);
-    gallery.innerHTML = template.join("");
+    gallery.innerHTML = `<h2>Cocktails</h2>${template.join("")}`;
 }
 
 getRandomCoctails();
