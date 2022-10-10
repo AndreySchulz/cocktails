@@ -3,18 +3,18 @@
 .is-hidden{
     display: none;
 }
-.visually-hidden {
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    border: 0;
-    padding: 0;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    margin: -1px;
-}
+// .visually-hidden {
+//     position: absolute;
+//     white-space: nowrap;
+//     width: 1px;
+//     height: 1px;
+//     overflow: hidden;
+//     border: 0;
+//     padding: 0;
+//     clip: rect(0 0 0 0);
+//     clip-path: inset(50%);
+//     margin: -1px;
+// }
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -58,8 +58,6 @@ ul {
 
 .container {
     margin: 0 auto;
-    padding-left: 16px;
-    padding-right: 16px;
 
     @media screen and (max-width: 767px) {
         max-width: 480px;
@@ -71,8 +69,8 @@ ul {
         padding-right: 32px;
     }
 
-    @media screen and (min-width: 1200px) {
-        width: 1200px;
+    @media screen and (min-width: 1280px) {
+        width: 1280px;
         padding-left: 16px;
         padding-right: 16px;
     }
