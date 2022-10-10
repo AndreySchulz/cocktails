@@ -1,34 +1,33 @@
 <header class="header container">
     <img src="./images/icon.png" alt="Іконка" class="header__icon" />
     <ul class="header__list">
-      <li class="header__item">
-        <a href="./index.html">Home</a>
-      </li>
-      <li class="header__item">
-        <a href="./favorite.html">Favorite</a>
-      </li>
+        <li class="header__item">
+            <a href="#">Home</a>
+        </li>
+        <li class="header__item dropdown">
+            <a href="#" class="dropbtn">Favorite</a>
+            <div class="dropdown-content">
+                <a href="#">Favorite cocktails</a>
+                <a href="#">Favorite ingredients</a>
+            </div>
+        </li>
     </ul>
 
     <form action="" id="form" class="header__search">
-      <button type="submit" id="button" class="header__search-btn">
-        <img src="./images/bx_search.png" width="24" height="24" alt="Пошук" />
-      </button>
-      <input
-        type="text"
-        id="input"
-        placeholder="Search |"
-        class="header__search-text"
-      />
+        <button type="submit" id="button" class="header__search-btn">
+            <img src="./images/bx_search.png" width="24" height="24" alt="Пошук" />
+        </button>
+        <input type="text" id="input" placeholder="Search |" class="header__search-text" />
     </form>
 
     <div class="header__bg">
-      <p class="header__light">Light</p>
-      <div class="header__switch">
-        <label class="switch">
-          <input type="checkbox" />
-          <span class="slider"></span>
-        </label>
-      </div>
-      <p class="header__dark">Dark</p>
+        <p class="header__light">Light</p>
+        <div class="header__switch">
+            <label class="switch">
+                <input type="checkbox" />
+                <span class="slider"></span>
+            </label>
+        </div>
+        <p class="header__dark">Dark</p>
     </div>
 </header>
