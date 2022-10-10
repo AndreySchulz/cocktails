@@ -1,15 +1,17 @@
 import { Notify } from 'notiflix';
-import { searchCocktails, searchByFirstLetter } from './helpers/api';
-import { getAlphabetMarkup } from './helpers/helpers';
+import { searchCocktails, searchByFirstLetter, searchRandom } from './js/helpers/api';
+import { getAlphabetMarkup, getDrinksMarkup } from './js/helpers/helpers';
 import { addCocktailToFavorites, isCocktailFavorites, removeCocktailFromFavorites } from './js/favorites';
 import { showFavoritesCocktails } from './js/favorites-cards';
 import { renderCocktailCard } from './js/coctail-modal';
+
 
 const searchForm = document.querySelector('#form');
 const searchField = document.querySelector('#input');
 const searchBtn = document.querySelector('#button');
 const gallery = document.querySelector('#gallery');
 const alphabetUl = document.querySelector('#alphabet');
+const templateWithoutResultText = `<li><p>Sorry, we didn't find any cocktail for you</p></li>`
 
 // console.log(form);
 
@@ -22,14 +24,16 @@ searchForm.addEventListener('submit', async event => {
     Notify.info('Please enter the name of your cocktail');
     return;
   }
+  
   const drinks = await searchCocktails(cocktailName);
 
-  const template = drinks.map(({ idDrink, strDrink, strDrinkThumb }) => {
-    return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button id="${idDrink}" data-details>Learn more</button>${getFavoriteBtn(
-      idDrink
-    )}</a></li>`;
-  });
+  if (!drinks.length) {
+    gallery.innerHTML = templateWithoutResultText;
+
+  } else {
+  const template = getDrinksMarkup(drinks);
   gallery.innerHTML = template.join('');
+}
 });
 
 alphabetUl.addEventListener('click', async event => {
@@ -37,12 +41,14 @@ alphabetUl.addEventListener('click', async event => {
     const resultLetter = event.target.textContent;
     const drinks = await searchByFirstLetter(resultLetter);
 
-    const template = drinks.map(({ idDrink, strDrink, strDrinkThumb }) => {
-      return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button id="${idDrink}" data-details>Learn more</button>${getFavoriteBtn(
-        idDrink
-      )}</a></li>`;
-    });
+    if (!drinks.length) {
+        gallery.innerHTML = templateWithoutResultText;
+    
+      } else {
+
+    const template = getDrinksMarkup(drinks);
     gallery.innerHTML = template.join('');
+      }
   }
 });
 
@@ -65,12 +71,24 @@ gallery.addEventListener('click', async event => {
   }
 });
 
-function getFavoriteBtn(id) {
+export function getFavoriteBtn(id) {
   return isCocktailFavorites(id)
     ? `<button id="${id}" data-remove-favorite>Remove</button><button id="${id}" class="is-hidden" data-add-favorite>Add to</button>`
     : `<button id="${id}" data-add-favorite>Add to</button><button id="${id}" class="is-hidden" data-remove-favorite>Remove</button>`;
 }
 
 // showFavoritesCocktails().then();
+
+const getRandomCoctails = async () => {
+    const randomCocktails = await searchRandom();
+    const template = getDrinksMarkup(randomCocktails);
+    gallery.innerHTML = template.join("");
+}
+
+getRandomCoctails();
+
+
+
+    
 
 
