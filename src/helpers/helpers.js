@@ -6,5 +6,5 @@ export const getAlphabetMarkup = (targetElement) => {
         return `<li><span class="letterInLi">${item}</span></li>`
     })
     targetElement.innerHTML = template.join("");
-    
+
 }
