@@ -3,40 +3,21 @@ import {
   addIngredientsFavorites,
   isIngredientsFavorites,
   removeIngredientsFromFavorites,
+  getIngredientFavoriteBtn,
 } from './favorites';
+import { createOnClickForModal } from './modal';
 
 const modalIngredientContent = document.querySelector(
   '.modal-ingredient__content'
 );
 const backDrop = document.querySelector('#modal-ingredient');
 
-backDrop.addEventListener('click', async event => {
-  if (event.target == backDrop) {
-    backDrop.classList.add('is-hidden');
-    return;
-  }
-  const closeBtn = event.target.closest('[data-modal-close]');
-  if (closeBtn) {
-    backDrop.classList.add('is-hidden');
-    return;
-  }
-  const addFavoriteBtn = event.target.closest('[data-add-favorite]');
-  if (addFavoriteBtn) {
-    addIngredientsFavorites(addFavoriteBtn.id);
-    addFavoriteBtn.classList.add('is-hidden');
-    addFavoriteBtn.parentNode
-      .querySelector('[data-remove-favorite]')
-      .classList.remove('is-hidden');
-  }
-  const removeFavoriteBtn = event.target.closest('[data-remove-favorite]');
-  if (removeFavoriteBtn) {
-    removeIngredientsFromFavorites(removeFavoriteBtn.id);
-    removeFavoriteBtn.classList.add('is-hidden');
-    removeFavoriteBtn.parentNode
-      .querySelector('[data-add-favorite]')
-      .classList.remove('is-hidden');
-  }
-});
+const onClickModal = createOnClickForModal(
+  addIngredientsFavorites,
+  removeIngredientsFromFavorites
+);
+
+backDrop.addEventListener('click', onClickModal);
 
 async function searchIngredientByName(ingredient) {
   try {
@@ -75,16 +56,10 @@ async function renderIngredientCard(ingredient) {
         <li class="content__item">Alcohol by volume: ${strABV}</li>
         <li class="content__item">Flavour:	</li>
     </ul>
-    ${getFavoriteBtn(idIngredient)}
+    ${getIngredientFavoriteBtn(idIngredient)}
     `;
   modalIngredientContent.innerHTML = markup;
   backDrop.classList.remove('is-hidden');
-}
-
-function getFavoriteBtn(id) {
-  return isIngredientsFavorites(id)
-    ? `<button id="${id}" data-remove-favorite>Remove</button><button id="${id}" class="is-hidden" data-add-favorite>Add to</button>`
-    : `<button id="${id}" data-add-favorite>Add to</button><button id="${id}" class="is-hidden" data-remove-favorite>Remove</button>`;
 }
 
 export { renderIngredientCard };

@@ -4,6 +4,7 @@ import { getAlphabetMarkup } from './helpers/helpers';
 import { addCocktailToFavorites, isCocktailFavorites, removeCocktailFromFavorites } from './js/favorites';
 import { showFavoritesCocktails } from './js/favorites-cards';
 import { renderCocktailCard } from './js/coctail-modal';
+import { getCocktailFavoriteBtn } from './js/favorites';
 
 const searchForm = document.querySelector('#form');
 const searchField = document.querySelector('#input');
@@ -25,7 +26,7 @@ searchForm.addEventListener('submit', async event => {
   const drinks = await searchCocktails(cocktailName);
 
   const template = drinks.map(({ idDrink, strDrink, strDrinkThumb }) => {
-    return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button id="${idDrink}" data-details>Learn more</button>${getFavoriteBtn(
+    return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button id="${idDrink}" class="gallery__button" data-details>Learn more</button>${getCocktailFavoriteBtn(
       idDrink
     )}</a></li>`;
   });
@@ -38,7 +39,7 @@ alphabetUl.addEventListener('click', async event => {
     const drinks = await searchByFirstLetter(resultLetter);
 
     const template = drinks.map(({ idDrink, strDrink, strDrinkThumb }) => {
-      return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button id="${idDrink}" data-details>Learn more</button>${getFavoriteBtn(
+      return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button id="${idDrink}" class="gallery__button" data-details>Learn more</button>${getCocktailFavoriteBtn(
         idDrink
       )}</a></li>`;
     });
@@ -64,12 +65,6 @@ gallery.addEventListener('click', async event => {
     await renderCocktailCard(detailsBtn.id);
   }
 });
-
-function getFavoriteBtn(id) {
-  return isCocktailFavorites(id)
-    ? `<button id="${id}" data-remove-favorite>Remove</button><button id="${id}" class="is-hidden" data-add-favorite>Add to</button>`
-    : `<button id="${id}" data-add-favorite>Add to</button><button id="${id}" class="is-hidden" data-remove-favorite>Remove</button>`;
-}
 
 // showFavoritesCocktails().then();
 

@@ -1,0 +1,30 @@
+%button {
+    display: inline-flex;
+    text-align: center;
+
+    padding: 12px 24px;
+    
+    background-color: $bg-btn;
+    color: $text-btn;
+    border: none;
+    border-radius: 4px;
+
+    font-family: $font-poppins;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 0,02;
+
+    transition: background-color 250ms linear; 
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background-color: $main-orange;
+    }
+
+    // & .button__icon {
+    //     fill: $title-color;
+    //     margin-left: 15px;
+    // }
+}
