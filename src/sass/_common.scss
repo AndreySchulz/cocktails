@@ -1,5 +1,8 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
 
+.is-hidden{
+    display: none;
+}
 .visually-hidden {
     position: absolute;
     white-space: nowrap;
