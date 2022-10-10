@@ -69,7 +69,7 @@
     /*=h*/
     margin: 4px;
     transform: translateY(50%);
-    position: relative;
+    //position: relative;
 }
 
 .slider {
@@ -151,4 +151,47 @@ input:checked+.slider {
     font-size: 16px;
     color: $main-orange;
 }
+
+.dropbtn {
+    //padding: 16px;
+    font-size: 16px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    margin-top: 3px;    
+    margin-left: -16px;
+    display: none;
+    color: $bg-dark;
+    position: absolute;
+    background-color: $bg-light;
+    min-width: 210px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    //border: 1px solid $main-orange;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: $bg-dark;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: $main-orange;
+    //border: 1px solid $main-orange;
+    color: $bg-light;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 
