@@ -1,5 +1,41 @@
+import { getDatabase, ref, set, onValue } from 'firebase/database';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  getRedirectResult,
+  onAuthStateChanged,
+  signOut,
+} from 'firebase/auth';
+import { app } from './firebase';
+
 const FAVORITE_COCTAILS_KEY = 'favorite-cocktails';
 const FAVORITE_INGREDIENTS_KEY = 'favorite-ingredients';
+
+let userId;
+const auth = getAuth(app);
+onAuthStateChanged(auth, user => {
+  console.log(user);
+  if (user) {
+    userId = user.uid;
+    onReadData();
+  } else {
+    userId = null;
+  }
+});
+
+const db = getDatabase();
+function writeUserData(favoriteKey, favorites) {
+  set(ref(db, `${userId}/${favoriteKey}`), favorites);
+}
+
+function onReadData() {
+  const starCountRef = ref(db, `${userId}/${FAVORITE_COCTAILS_KEY}`);
+  onValue(starCountRef, snapshot => {
+    const data = snapshot.val();
+    console.log("on value", data);
+  });
+}
 
 function getFavorite(favoriteKey) {
   const cocktailsString = localStorage.getItem(favoriteKey) || '[]';
@@ -17,6 +53,7 @@ function addToFavorites(favoriteKey, id) {
     const favorites = getFavorite(favoriteKey);
     if (favorites.indexOf(id) != -1) return;
     localStorage.setItem(favoriteKey, JSON.stringify([...favorites, id]));
+    writeUserData(favoriteKey, [...favorites, id]);
   } catch (error) {
     console.error('Set state error: ', error.message);
   }
@@ -32,8 +69,8 @@ function addIngredientsFavorites(id) {
 
 function getFavoriteBtn(favoriteKey, id) {
   return isFavorites(favoriteKey, id)
-    ? /*html*/`<button id="${id}" class="gallery__button" data-remove-favorite>Remove</button><button id="${id}" class="gallery__button is-hidden" data-add-favorite>Add to</button>`
-    : /*html*/`<button id="${id}" class="gallery__button" data-add-favorite>Add to</button><button id="${id}" class="gallery__button is-hidden" data-remove-favorite>Remove</button>`;
+    ? /*html*/ `<button id="${id}" class="gallery__button" data-remove-favorite>Remove</button><button id="${id}" class="gallery__button is-hidden" data-add-favorite>Add to</button>`
+    : /*html*/ `<button id="${id}" class="gallery__button" data-add-favorite>Add to</button><button id="${id}" class="gallery__button is-hidden" data-remove-favorite>Remove</button>`;
 }
 function getCocktailFavoriteBtn(id) {
   return getFavoriteBtn(FAVORITE_COCTAILS_KEY, id);

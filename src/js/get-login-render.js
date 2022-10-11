@@ -19,17 +19,5 @@ export function renderUser(user, authBtn, boxAuthBtn) {
   authBtn.style.borderRadius = '50%';
   authBtn.style.backgroundSize = 'contain';
   boxAuthBtn.insertAdjacentHTML('beforeend', getRenderLogin(user.photoURL));
-  const logoutBtn = document.querySelector('#logout');
-  logoutBtn.addEventListener('click', event => {
-    event.preventDefault();
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        boxAuthBtn.innerHTML = `<button id="authBtn" type="button">Sing in</button>`;
-      })
-      .catch(error => {
-        // An error happened.
-      });
-  });
+  
 }
