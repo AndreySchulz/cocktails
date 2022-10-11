@@ -1,3 +1,14 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  getRedirectResult,
+  onAuthStateChanged,
+  signOut,
+} from 'firebase/auth';
+
 import { Notify } from 'notiflix';
 import {
   searchCocktails,
@@ -12,7 +23,24 @@ import {
 import { renderCocktailCard } from './js/coctail-modal';
 import { renderIngredientCard } from './js/ingredients-modal';
 import { getCocktailFavoriteBtn } from './js/favorites';
-import { showFavoritesCocktails, showFavoritesIngredients } from './js/favorites-cards';
+import {
+  showFavoritesCocktails,
+  showFavoritesIngredients,
+} from './js/favorites-cards';
+import { getRenderLogin, renderUser } from './js/get-login-render';
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: 'AIzaSyDP0ezK6Jh8THcgopz24LdXtUN7Vm4n2g4',
+  authDomain: 'cocktails-f63a0.firebaseapp.com',
+  projectId: 'cocktails-f63a0',
+  storageBucket: 'cocktails-f63a0.appspot.com',
+  messagingSenderId: '477783115593',
+  appId: '1:477783115593:web:d5a83b2b774684d061fc98',
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 const searchMobileForm = document.querySelector("#mobile-form")
 const searchForm = document.querySelector('#form');
@@ -21,9 +49,11 @@ const searchField = document.querySelector('#input');
 const searchBtn = document.querySelector('#button');
 const gallery = document.querySelector('#gallery');
 const alphabetUl = document.querySelector('#alphabet');
-const templateWithoutResultText = document.querySelector('.gallery__sory');
+const templateWithoutResultText = document.querySelector('.gallery__sorry');
 templateWithoutResultText.remove();
 templateWithoutResultText.classList.remove('is-hidden');
+// именно тут закоментил ибо ошибка
+
 const favoriteCocktails = document.querySelector('[data-cocktails]');
 const favoriteIngredients = document.querySelector('[data-ingredients]');
 const divPagination = document.querySelector(".pagination-markup");
@@ -60,6 +90,14 @@ searchForm.addEventListener('submit', async event => {
   paginateCocktails(searchCocktails, cocktailName);
   
 
+
+    gallery.innerHTML = /*html*/ `
+      <h2 class="gallery__title">Searching results</h2>
+      <ul class="gallery__list list">
+        ${template.join('')}
+      </ul>`;
+  }
+
 });
 
 alphabetUl.addEventListener('click', async event => {
@@ -72,8 +110,8 @@ alphabetUl.addEventListener('click', async event => {
       gallery.append(templateWithoutResultText);
     } else {
       const template = getDrinksMarkup(drinks);
-      gallery.innerHTML = /*html*/`
-        <h2>Searching results</h2>
+      gallery.innerHTML = /*html*/ `
+        <h2 class="gallery__title">Searching results</h2>
         <ul class="gallery__list list">
           ${template.join('')}
         </ul>`;
@@ -102,7 +140,9 @@ gallery.addEventListener('click', async event => {
   if (detailsBtn) {
     await renderCocktailCard(detailsBtn.id);
   }
-  const detailsIngredientBtn = event.target.closest('[data-ingredient-details]');
+  const detailsIngredientBtn = event.target.closest(
+    '[data-ingredient-details]'
+  );
   if (detailsIngredientBtn) {
     await renderIngredientCard(detailsIngredientBtn.id);
   }
@@ -111,14 +151,15 @@ gallery.addEventListener('click', async event => {
 const getRandomCoctails = async () => {
   const randomCocktails = await searchRandom();
   const template = getDrinksMarkup(randomCocktails);
-  gallery.innerHTML = /*html*/`
-    <h2>Cocktails</h2>
+  gallery.innerHTML = /*html*/ `
+    <h2 class="gallery__title">Cocktails</h2>
     <ul class="gallery__list list">
       ${template.join('')}
     </ul>`;
 };
 
 getRandomCoctails();
+
 
 async function paginateCocktails (getData, params) {
     const resultData = await getData(params);
@@ -198,4 +239,57 @@ async function paginateCocktails (getData, params) {
       
 
     }
+
+=======
+const provider = new GoogleAuthProvider();
+console.log('object :>> ', provider);
+
+const authBtn = document.querySelector('#authBtn');
+const boxAuthBtn = document.querySelector('#authBtnLog');
+console.log('authBtn :>> ', authBtn);
+authBtn.addEventListener('click', () => {
+  const auth = getAuth(app);
+  auth.languageCode = 'ua';
+  console.log('object : ', auth);
+  signInWithPopup(auth, provider)
+    .then(result => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      console.log('token :>> ', token);
+      // The signed-in user info.
+      const user = result.user;
+      console.log('user :>> ', user);
+      renderUser(user, authBtn, boxAuthBtn);
+      // ...
+    })
+    .catch(error => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+    });
+});
+
+const auth = getAuth();
+const user = auth.currentUser;
+onAuthStateChanged(auth, user => {
+  console.log(user);
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    // const uid = user.uid;
+    // const user = result.user;
+
+    renderUser(user, authBtn, boxAuthBtn);
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+});
 

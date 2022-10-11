@@ -23,7 +23,7 @@ async function showFavoritesIngredients() {
   const template = getIngredientsMarkup(list);
   console.log(template);
   gallery.innerHTML = /*html*/`
-    <h2>Favorite ingredients</h2>
+    <h2 class="gallery__title">Favorite ingredients</h2>
     <ul class="gallery__list list">
       ${template.join('')}
     </ul>`;
