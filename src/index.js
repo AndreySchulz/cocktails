@@ -5,7 +5,8 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   getRedirectResult,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut,
 } from 'firebase/auth';
 
 import { Notify } from 'notiflix';
@@ -26,6 +27,7 @@ import {
   showFavoritesCocktails,
   showFavoritesIngredients,
 } from './js/favorites-cards';
+import { getRenderLogin, renderUser } from './js/get-login-render';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -143,7 +145,8 @@ const provider = new GoogleAuthProvider();
 console.log('object :>> ', provider);
 
 const authBtn = document.querySelector('#authBtn');
-
+const boxAuthBtn = document.querySelector('#authBtnLog');
+console.log('authBtn :>> ', authBtn);
 authBtn.addEventListener('click', () => {
   const auth = getAuth(app);
   auth.languageCode = 'ua';
@@ -157,8 +160,8 @@ authBtn.addEventListener('click', () => {
       // The signed-in user info.
       const user = result.user;
       console.log('user :>> ', user);
-      const photoURL = user.photoURL;
-      authBtn.innerHTML = /*html*/`<img src="${photoURL}" alt="User photo" width="40" height="40"/>`; // ...
+      renderUser(user, authBtn, boxAuthBtn);
+      // ...
     })
     .catch(error => {
       // Handle Errors here.
@@ -179,9 +182,10 @@ onAuthStateChanged(auth, user => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    const photoURL = user.photoURL;
-    authBtn.innerHTML = /*html*/`<img src="${photoURL}" alt="User photo" width="40" height="40"/>`;
+    // const uid = user.uid;
+    // const user = result.user;
+
+    renderUser(user, authBtn, boxAuthBtn);
     // ...
   } else {
     // User is signed out

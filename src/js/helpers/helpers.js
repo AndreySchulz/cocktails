@@ -53,9 +53,11 @@ export const getDrinksMarkup = drinks => {
     <li class="gallery__item">
       <a>
         <img class="gallery__img" src="${strDrinkThumb}" alt="${strDrink}"/>
-        <h3 class="gallery__text">${strDrink}</h3>
-        <button id="${idDrink}" class="gallery__button" data-details>Learn more</button>
-        ${getCocktailFavoriteBtn(idDrink)}
+        <div class="gallery__box">
+          <h3 class="gallery__text">${strDrink}</h3>
+          <button id="${idDrink}" class="gallery__button" data-details>Learn more</button>
+          ${getCocktailFavoriteBtn(idDrink)}
+        </div>
       </a>
     </li>`;
   });
