@@ -42,7 +42,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+const searchMobileForm = document.querySelector("#mobile-form")
 const searchForm = document.querySelector('#form');
+const searchMobileField = document.querySelector('#mobile-input');
 const searchField = document.querySelector('#input');
 const searchBtn = document.querySelector('#button');
 const gallery = document.querySelector('#gallery');
@@ -54,26 +56,40 @@ templateWithoutResultText.classList.remove('is-hidden');
 
 const favoriteCocktails = document.querySelector('[data-cocktails]');
 const favoriteIngredients = document.querySelector('[data-ingredients]');
+const divPagination = document.querySelector(".pagination-markup");
+
 
 favoriteCocktails.addEventListener('click', showFavoritesCocktails);
 favoriteIngredients.addEventListener('click', showFavoritesIngredients);
 
 getAlphabetMarkup(alphabetUl);
 
+searchMobileForm.addEventListener("submit", async event => {
+    event.preventDefault();
+  
+    const cocktailName = searchMobileField.value.trim();
+    if (cocktailName === '') {
+      Notify.info('Please enter the name of your cocktail');
+      return;
+    }
+  
+    paginateCocktails(searchCocktails, cocktailName);
+   
+  
+  });
+
 searchForm.addEventListener('submit', async event => {
   event.preventDefault();
+  
   const cocktailName = searchField.value.trim();
   if (cocktailName === '') {
     Notify.info('Please enter the name of your cocktail');
     return;
   }
 
-  const drinks = await searchCocktails(cocktailName);
-  if (!drinks.length) {
-    gallery.innerHTML = '';
-    gallery.append(templateWithoutResultText);
-  } else {
-    const template = getDrinksMarkup(drinks);
+  paginateCocktails(searchCocktails, cocktailName);
+  
+
 
     gallery.innerHTML = /*html*/ `
       <h2 class="gallery__title">Searching results</h2>
@@ -81,6 +97,7 @@ searchForm.addEventListener('submit', async event => {
         ${template.join('')}
       </ul>`;
   }
+
 });
 
 alphabetUl.addEventListener('click', async event => {
@@ -143,6 +160,87 @@ const getRandomCoctails = async () => {
 
 getRandomCoctails();
 
+
+async function paginateCocktails (getData, params) {
+    const resultData = await getData(params);
+    let currentPage = 1;
+    let cocktails = 3;
+    
+    if (window.innerWidth > 767 && window.innerWidth < 1280) {
+        cocktails = 6;
+      } else if (window.innerWidth > 1279) {
+        cocktails = 9;
+      }
+
+      const drawCocktails = (dataWithAllCocktails, cocktailsPerPage, page) => {
+        if (!dataWithAllCocktails.length) {
+            gallery.innerHTML = '';
+            gallery.append(templateWithoutResultText);
+          } else {
+           
+
+        page -= 1; 
+
+        const start = cocktailsPerPage * page;
+        const end = start + cocktailsPerPage;
+        const paginatedCocktails = dataWithAllCocktails.slice(start, end);
+        gallery.innerHTML = /*html*/`
+      <h2>Searching results</h2>
+      <ul class="gallery__list list">
+        ${getDrinksMarkup(paginatedCocktails).join("")}
+      </ul>`;
+      }
+    }
+
+      const displayPaginationBtn = (page) => {
+      const paginationItem = document.createElement('li');
+      paginationItem.classList.add("pagination-item");
+      paginationItem.innerText = page;
+
+      if(currentPage === page) {
+        paginationItem.classList.add("pagination-item-active");
+        
+      }
+
+      paginationItem.addEventListener("click", () => {
+        currentPage = page;
+        drawCocktails(resultData, cocktails, currentPage);
+
+        let currentItemLi = document.querySelector(".pagination-item-active");
+        currentItemLi.classList.remove("pagination-item-active");
+
+        paginationItem.classList.add("pagination-item-active");
+
+      })
+      return paginationItem;
+   
+      }
+
+      const displayPagination = (dataWithAllCocktails, cocktailsPerPage) => {
+        
+
+        const numberOfPages = Math.ceil(dataWithAllCocktails.length / cocktailsPerPage);
+       
+        const ulPaginationBtns = document.createElement("ul");
+        ulPaginationBtns.classList.add("pagination-list");
+
+        for(let i = 1; i <= numberOfPages; i += 1) {
+            const oneBtn = displayPaginationBtn(i); 
+            ulPaginationBtns.appendChild(oneBtn);
+
+        }
+        divPagination.innerHTML = "";
+        divPagination.appendChild(ulPaginationBtns);
+
+
+      }
+      drawCocktails(resultData, cocktails, currentPage)
+      displayPagination(resultData, cocktails);
+      
+
+    }
+
+=======
 const provider = new GoogleAuthProvider();
 console.log('object :>> ', provider);
 
@@ -194,3 +292,4 @@ onAuthStateChanged(auth, user => {
     // ...
   }
 });
+
