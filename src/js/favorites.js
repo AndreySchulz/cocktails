@@ -30,6 +30,18 @@ function addIngredientsFavorites(id) {
   addToFavorites(FAVORITE_INGREDIENTS_KEY, id);
 }
 
+function getFavoriteBtn(favoriteKey, id) {
+  return isFavorites(favoriteKey, id)
+    ? /*html*/`<button id="${id}" class="gallery__button" data-remove-favorite>Remove</button><button id="${id}" class="gallery__button is-hidden" data-add-favorite>Add to</button>`
+    : /*html*/`<button id="${id}" class="gallery__button" data-add-favorite>Add to</button><button id="${id}" class="gallery__button is-hidden" data-remove-favorite>Remove</button>`;
+}
+function getCocktailFavoriteBtn(id) {
+  return getFavoriteBtn(FAVORITE_COCTAILS_KEY, id);
+}
+function getIngredientFavoriteBtn(id) {
+  return getFavoriteBtn(FAVORITE_INGREDIENTS_KEY, id);
+}
+
 function isFavorites(favoriteKey, id) {
   const favorites = getFavorite(favoriteKey);
   return favorites.indexOf(id) != -1 ? true : false;
@@ -68,4 +80,6 @@ export {
   addIngredientsFavorites,
   isIngredientsFavorites,
   removeIngredientsFromFavorites,
+  getCocktailFavoriteBtn,
+  getIngredientFavoriteBtn,
 };

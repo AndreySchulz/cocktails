@@ -55,3 +55,36 @@ export const searchRandom = async () => {
 
   return searchDataFromCocktails;
 };
+
+export async function searchById(id) {
+  try {
+    const response = await axios.get(
+      `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+    );
+    return response.data.drinks[0];
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function searchIngredientByName(ingredient) {
+  try {
+    const response = await axios.get(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${ingredient}`
+    );
+    return response.data.ingredients[0];
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function searchIngredientById(id) {
+  try {
+    const response = await axios.get(
+      `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?iid=${id}`
+    );
+    return response.data.ingredients[0];
+  } catch (error) {
+    return null;
+  }
+}

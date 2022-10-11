@@ -17,8 +17,13 @@
 // }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: $bg-light;
+    background-color: $bg-body;
+    color: $bg-dark;
+    font-family: $font-poppins;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0;
 }
 
 h1,
@@ -57,21 +62,21 @@ ul {
 }
 
 .container {
+    width: 100%;
     margin: 0 auto;
+    padding: 0 20px;
 
-    @media screen and (max-width: 767px) {
-        max-width: 480px;
+    @media screen and (min-width: $mobile) {
+        max-width: $tablet;
     }
 
-    @media screen and (min-width: 768px) {
-        width: 768px;
-        padding-left: 32px;
-        padding-right: 32px;
+    @media screen and (min-width: $tablet) {
+        max-width: $tablet;
+        padding: 0 32px;
     }
 
-    @media screen and (min-width: 1280px) {
-        width: 1280px;
-        padding-left: 16px;
-        padding-right: 16px;
+    @media screen and (min-width: $desktop) {
+        max-width: $desktop;
+        padding: 0 16px;
     }
 }
