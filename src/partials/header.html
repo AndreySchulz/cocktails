@@ -1,14 +1,17 @@
 <header class="header container">
-    <a href="#"><img src="./images/icon.png" alt="Іконка" class="header__icon" /></a>
+    <a href="./index.html" aria-label="logo">
+        <img src="./images/icon.png" alt="Іконка" class="header__icon" />
+    </a>
+
     <ul class="header__list">
         <li class="header__item">
-            <a href="#">Home</a>
+            <a href="./index.html">Home</a>
         </li>
         <li class="header__item dropdown">
             <a href="#" class="dropbtn">Favorite</a>
             <div class="dropdown-content">
-                <a href="#">Favorite cocktails</a>
-                <a href="#">Favorite ingredients</a>
+                <a class="dropdown-content__link" href="#" data-cocktails>Favorite cocktails</a>
+                <a class="dropdown-content__link" href="#" data-ingredients>Favorite ingredients</a>
             </div>
         </li>
     </ul>

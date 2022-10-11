@@ -1,44 +1,23 @@
-import axios from 'axios';
-import { searchById } from './favorites-cards';
+import { searchById } from './helpers/api';
 import { renderIngredientCard } from './ingredients-modal';
 import {
   addCocktailToFavorites,
-  isCocktailFavorites,
   removeCocktailFromFavorites,
+  getCocktailFavoriteBtn,
 } from './favorites';
+import { createOnClickForModal } from './modal';
 
 const modalCocktailContent = document.querySelector('.modal-cocktail__content');
 const backDrop = document.querySelector('#modal-cocktail');
 
+const onClickModal = createOnClickForModal(addCocktailToFavorites, removeCocktailFromFavorites);
+
 backDrop.addEventListener('click', async event => {
-  if (event.target == backDrop) {
-    backDrop.classList.add('is-hidden');
-    return;
-  }
-  const closeBtn = event.target.closest('[data-modal-close]');
-  if (closeBtn) {
-    backDrop.classList.add('is-hidden');
-    return;
-  }
+  await onClickModal(event);
+
   const linkIngredient = event.target.closest('[data-ingredient]');
   if (linkIngredient) {
     await renderIngredientCard(linkIngredient.dataset.ingredient);
-  }
-  const addFavoriteBtn = event.target.closest('[data-add-favorite]');
-  if (addFavoriteBtn) {
-    addCocktailToFavorites(addFavoriteBtn.id);
-    addFavoriteBtn.classList.add('is-hidden');
-    addFavoriteBtn.parentNode
-      .querySelector('[data-remove-favorite]')
-      .classList.remove('is-hidden');
-  }
-  const removeFavoriteBtn = event.target.closest('[data-remove-favorite]');
-  if (removeFavoriteBtn) {
-    removeCocktailFromFavorites(removeFavoriteBtn.id);
-    removeFavoriteBtn.classList.add('is-hidden');
-    removeFavoriteBtn.parentNode
-      .querySelector('[data-add-favorite]')
-      .classList.remove('is-hidden');
   }
 });
 
@@ -97,16 +76,10 @@ async function renderCocktailCard(id) {
        )
        .join('')}
     </ul>
-    ${getFavoriteBtn(idDrink)}
+    ${getCocktailFavoriteBtn(idDrink)}
       `;
   modalCocktailContent.innerHTML = markup;
   backDrop.classList.remove('is-hidden');
-}
-
-function getFavoriteBtn(id) {
-  return isCocktailFavorites(id)
-    ? `<button id="${id}" data-remove-favorite>Remove</button><button id="${id}" class="is-hidden" data-add-favorite>Add to</button>`
-    : `<button id="${id}" data-add-favorite>Add to</button><button id="${id}" class="is-hidden" data-remove-favorite>Remove</button>`;
 }
 
 export { renderCocktailCard };
