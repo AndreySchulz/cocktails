@@ -48,8 +48,8 @@ const searchBtn = document.querySelector('#button');
 const gallery = document.querySelector('#gallery');
 const alphabetUl = document.querySelector('#alphabet');
 const templateWithoutResultText = document.querySelector('.gallery__sorry');
-// templateWithoutResultText.remove();
-// templateWithoutResultText.classList.remove('is-hidden');
+templateWithoutResultText.remove();
+templateWithoutResultText.classList.remove('is-hidden');
 // именно тут закоментил ибо ошибка
 
 const favoriteCocktails = document.querySelector('[data-cocktails]');
