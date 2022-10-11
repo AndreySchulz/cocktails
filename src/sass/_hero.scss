@@ -1,4 +1,18 @@
 .hero__alphabet{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    width: 520px;
+}
+
+.letterInLi {
+    width: 40px;
+    height: 40px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: $text-gray;
 }
