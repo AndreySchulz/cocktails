@@ -39,23 +39,24 @@ const alphabet = [
   0,
 ];
 
-export const getAlphabetMarkup = targetElement => {
-  const template = alphabet.map(item => {
-    return /*html*/`
-      <li>
-        <span class="letterInLi">${item}</span>
-      </li>`;
-  });
-  targetElement.innerHTML = template.join('');
-};
+
+
+
+export const getAlphabetMarkup = (targetElement) => {
+    const template = alphabet.map(item => {
+        return `<li><span class="letterInLi">${item}</span></li>`
+    })
+    targetElement.innerHTML = template.join("");
+
+}
 
 export const getDrinksMarkup = drinks => {
   const template = drinks.map(({ idDrink, strDrink, strDrinkThumb }) => {
     return /*html*/ `
-    <li>
+    <li class="gallery__item">
       <a>
-        <img src="${strDrinkThumb}" alt="${strDrink}"/>
-        <h3>${strDrink}</h3>
+        <img class="gallery__img" src="${strDrinkThumb}" alt="${strDrink}"/>
+        <h3 class="gallery__text">${strDrink}</h3>
         <button id="${idDrink}" class="gallery__button" data-details>Learn more</button>
         ${getCocktailFavoriteBtn(idDrink)}
       </a>
@@ -63,3 +64,4 @@ export const getDrinksMarkup = drinks => {
   });
   return template;
 };
+

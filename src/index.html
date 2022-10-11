@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page title</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./sass/index.scss" />
-  </head>
 
-  <body>
-    <include src="./partials/header.html"></include>
-    <include src="./partials/hero.html"></include>
-    <include src="./partials/modal-cocktail.html"></include>
-    <include src="./partials/modal-ingredient.html"></include>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page title</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./sass/index.scss" />
+</head>
 
-    <div class="gallery__sory  is-hidden">
+
+<body>
+  <include src="./partials/header.html"></include>
+  <include src="./partials/hero.html"></include>
+  <include src="./partials/gallery.html"></include>
+  <include src="./partials/modal-cocktail.html"></include>
+  <include src="./partials/modal-ingredient.html"></include>
+
+  <script type="module" src="./index.js"></script>
+   <div class="gallery__sory  is-hidden">
       <h2>Sorry, we didn't find any cocktail for you</h2>
       <img class="gallery__img" 
         srcset="./images/frame.png 280w, ./images/frame@2x.png 345w"
@@ -29,3 +31,7 @@
     <script type="module" src="./index.js"></script>
   </body>
 </html>
+</body>
+
+</html>
+
