@@ -14,7 +14,9 @@ import { renderIngredientCard } from './js/ingredients-modal';
 import { getCocktailFavoriteBtn } from './js/favorites';
 import { showFavoritesCocktails, showFavoritesIngredients } from './js/favorites-cards';
 
+const searchMobileForm = document.querySelector("#mobile-form")
 const searchForm = document.querySelector('#form');
+const searchMobileField = document.querySelector('#mobile-input');
 const searchField = document.querySelector('#input');
 const searchBtn = document.querySelector('#button');
 const gallery = document.querySelector('#gallery');
@@ -32,8 +34,23 @@ favoriteIngredients.addEventListener('click', showFavoritesIngredients);
 
 getAlphabetMarkup(alphabetUl);
 
+searchMobileForm.addEventListener("submit", async event => {
+    event.preventDefault();
+  
+    const cocktailName = searchMobileField.value.trim();
+    if (cocktailName === '') {
+      Notify.info('Please enter the name of your cocktail');
+      return;
+    }
+  
+    paginateCocktails(searchCocktails, cocktailName);
+   
+  
+  });
+
 searchForm.addEventListener('submit', async event => {
   event.preventDefault();
+  
   const cocktailName = searchField.value.trim();
   if (cocktailName === '') {
     Notify.info('Please enter the name of your cocktail');
@@ -41,7 +58,7 @@ searchForm.addEventListener('submit', async event => {
   }
 
   paginateCocktails(searchCocktails, cocktailName);
-  console.log("top")
+  
 
 });
 
@@ -107,7 +124,7 @@ async function paginateCocktails (getData, params) {
     const resultData = await getData(params);
     let currentPage = 1;
     let cocktails = 3;
-    console.log("paginate");
+    
     if (window.innerWidth > 767 && window.innerWidth < 1280) {
         cocktails = 6;
       } else if (window.innerWidth > 1279) {
@@ -119,7 +136,7 @@ async function paginateCocktails (getData, params) {
             gallery.innerHTML = '';
             gallery.append(templateWithoutResultText);
           } else {
-            console.log("draw");
+           
 
         page -= 1; 
 
@@ -162,7 +179,7 @@ async function paginateCocktails (getData, params) {
         
 
         const numberOfPages = Math.ceil(dataWithAllCocktails.length / cocktailsPerPage);
-        console.log(numberOfPages);
+       
         const ulPaginationBtns = document.createElement("ul");
         ulPaginationBtns.classList.add("pagination-list");
 
