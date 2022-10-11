@@ -1,36 +1,73 @@
-<header class="header container">
-    <a href="./index.html" aria-label="logo">
-        <img src="./images/icon.png" alt="Іконка" class="header__icon" />
+<header class="header">
+  <div class="container flex-box">
+    <a class="header__icon" href="./index.html" aria-label="logo">
+      <img src="./images/icon.png" alt="Іконка" />
     </a>
-
-    <ul class="header__list">
-        <li class="header__item">
-            <a href="./index.html">Home</a>
-        </li>
-        <li class="header__item dropdown">
-            <a href="#" class="dropbtn">Favorite</a>
+    <nav class="header__navigation">
+      <div class="navigation__flex">
+        <ul class="header__list">
+          <li class="header__item">
+            <a class="header__link" href="./index.html">Home</a>
+          </li>
+          <li class="header__item dropdown">
+            <a class="header__link" href="#" class="dropbtn">Favorite</a>
             <div class="dropdown-content">
-                <a class="dropdown-content__link" href="#" data-cocktails>Favorite cocktails</a>
-                <a class="dropdown-content__link" href="#" data-ingredients>Favorite ingredients</a>
+              <a class="dropdown-content__link" href="#" data-cocktails
+                >Favorite cocktails</a
+              >
+              <a class="dropdown-content__link" href="#" data-ingredients
+                >Favorite ingredients</a
+              >
             </div>
-        </li>
-    </ul>
+          </li>
+          <li class="header__item">
+            <button id="“authBtn”" type="“button”">Sing in</button>
+          </li>
+        </ul>
 
-    <form action="" id="form" class="header__search">
-        <button type="submit" id="button" class="header__search-btn">
-            <img src="./images/bx_search.png" width="24" height="24" alt="Пошук" />
-        </button>
-        <input type="text" id="input" placeholder="Search |" class="header__search-text" />
-    </form>
+        <form action="" id="form" class="header__search mobile">
+          <button type="submit" id="button" class="header__search-btn">
+            <img
+              src="./images/bx_search.png"
+              width="24"
+              height="24"
+              alt="Пошук"
+            />
+          </button>
+          <input
+            type="text"
+            id="input"
+            placeholder="Search |"
+            class="header__search-text"
+          />
+        </form>
 
-    <div class="header__bg">
-        <p class="header__light">Light</p>
-        <div class="header__switch">
+        <div class="header__bg">
+          <p class="header__light">Light</p>
+          <div class="header__switch">
             <label class="switch">
-                <input type="checkbox" />
-                <span class="slider"></span>
+              <input type="checkbox" />
+              <span class="slider"></span>
             </label>
+          </div>
+          <p class="header__dark">Dark</p>
         </div>
-        <p class="header__dark">Dark</p>
-    </div>
+      </div>
+    </nav>
+    <form action="" id="form" class="header__search tablet">
+      <button type="submit" id="button" class="header__search-btn">
+        <img src="./images/bx_search.png" width="24" height="24" alt="Пошук" />
+      </button>
+      <input
+        type="text"
+        id="input"
+        placeholder="Search |"
+        class="header__search-text"
+      />
+    </form>
+    <svg class="header__burger" width="32" height="32">
+      <use href="./images/symbol-defs-close.svg#icon-menu"></use>
+      <use href="./images/symbol-defs-close.svg#icon-Vector"></use>
+    </svg>
+  </div>
 </header>
