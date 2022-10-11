@@ -45,7 +45,11 @@ searchForm.addEventListener('submit', async event => {
   } else {
     const template = getDrinksMarkup(drinks);
 
-    gallery.innerHTML = `<h2>Searching results</h2>${template.join('')}`;
+    gallery.innerHTML = /*html*/`
+      <h2>Searching results</h2>
+      <ul class="gallery__list list">
+        ${template.join('')}
+      </ul>`;
   }
 });
 
@@ -59,7 +63,11 @@ alphabetUl.addEventListener('click', async event => {
       gallery.append(templateWithoutResultText);
     } else {
       const template = getDrinksMarkup(drinks);
-      gallery.innerHTML = `<h2>Searching results</h2>${template.join('')}`;
+      gallery.innerHTML = /*html*/`
+        <h2>Searching results</h2>
+        <ul class="gallery__list list">
+          ${template.join('')}
+        </ul>`;
     }
   }
 });
@@ -94,7 +102,11 @@ gallery.addEventListener('click', async event => {
 const getRandomCoctails = async () => {
   const randomCocktails = await searchRandom();
   const template = getDrinksMarkup(randomCocktails);
-  gallery.innerHTML = `<h2>Cocktails</h2>${template.join('')}`;
+  gallery.innerHTML = /*html*/`
+    <h2>Cocktails</h2>
+    <ul class="gallery__list list">
+      ${template.join('')}
+    </ul>`;
 };
 
 getRandomCoctails();

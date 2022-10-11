@@ -36,9 +36,9 @@ async function renderIngredientCard(ingredient) {
     strAlcohol,
     strABV,
   } = await searchIngredientByName(ingredient);
-  const markup = `
+  const markup = /*html*/`
       <h2 class="content__title">${strIngredient}</h2>
-      <h3 class="content__subtitle">${strType}</h3>
+      <h3 class="content__subtitle">${strType || 'None'}</h3>
       <p class="content__text">${strDescription}</p>
       <ul class="content__list">
         <li class="content__item">Type:	</li>
@@ -54,12 +54,13 @@ async function renderIngredientCard(ingredient) {
 
 function getIngredientsMarkup(ingredients) {
   return ingredients.map(
-    ({ idIngredient, strIngredient, strType }) => `
-    <h2 class="content__title">${strIngredient}</h2>
-    <h3 class="content__subtitle">${strType}</h3>
-    <button id="${strIngredient}" class="gallery__button" data-ingredient-details>Learn more</button>
-    ${getIngredientFavoriteBtn(idIngredient)}
-`
+    ({ idIngredient, strIngredient, strType }) => /*html*/`
+    <li class="gallery__item">
+      <h2 class="content__title">${strIngredient}</h2>
+      <h3 class="content__subtitle">${strType || 'None'}</h3>
+      <button id="${strIngredient}" class="gallery__button" data-ingredient-details>Learn more</button>
+      ${getIngredientFavoriteBtn(idIngredient)}
+    </li>`
   );
 }
 
