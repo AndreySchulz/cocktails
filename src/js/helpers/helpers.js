@@ -39,9 +39,6 @@ const alphabet = [
   0,
 ];
 
-
-
-
 export const getAlphabetMarkup = (targetElement) => {
     const template = alphabet.map(item => {
         return `<li><span class="letterInLi">${item}</span></li>`

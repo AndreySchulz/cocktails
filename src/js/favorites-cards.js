@@ -9,7 +9,11 @@ async function showFavoritesCocktails() {
   console.log(list);
   const template = getDrinksMarkup(list);
   console.log(template);
-  gallery.innerHTML = `<h2>Favorite cocktails</h2>${template.join('')}`;
+  gallery.innerHTML = /*html*/`
+    <h2>Favorite cocktails</h2>
+    <ul class="gallery__list list">
+      ${template.join('')}
+    </ul>`;
 }
 
 async function showFavoritesIngredients() {
@@ -18,7 +22,11 @@ async function showFavoritesIngredients() {
   console.log(list);
   const template = getIngredientsMarkup(list);
   console.log(template);
-  gallery.innerHTML = `<h2>Favorite ingredients</h2>${template.join('')}`;
+  gallery.innerHTML = /*html*/`
+    <h2>Favorite ingredients</h2>
+    <ul class="gallery__list list">
+      ${template.join('')}
+    </ul>`;
 }
 
 export { showFavoritesCocktails, showFavoritesIngredients };
