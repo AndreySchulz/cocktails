@@ -24,6 +24,8 @@ templateWithoutResultText.remove();
 templateWithoutResultText.classList.remove('is-hidden');
 const favoriteCocktails = document.querySelector('[data-cocktails]');
 const favoriteIngredients = document.querySelector('[data-ingredients]');
+const divPagination = document.querySelector(".pagination-markup");
+
 
 favoriteCocktails.addEventListener('click', showFavoritesCocktails);
 favoriteIngredients.addEventListener('click', showFavoritesIngredients);
@@ -38,19 +40,9 @@ searchForm.addEventListener('submit', async event => {
     return;
   }
 
-  const drinks = await searchCocktails(cocktailName);
-  if (!drinks.length) {
-    gallery.innerHTML = '';
-    gallery.append(templateWithoutResultText);
-  } else {
-    const template = getDrinksMarkup(drinks);
+  paginateCocktails(searchCocktails, cocktailName);
+  console.log("top")
 
-    gallery.innerHTML = /*html*/`
-      <h2>Searching results</h2>
-      <ul class="gallery__list list">
-        ${template.join('')}
-      </ul>`;
-  }
 });
 
 alphabetUl.addEventListener('click', async event => {
@@ -110,3 +102,83 @@ const getRandomCoctails = async () => {
 };
 
 getRandomCoctails();
+
+async function paginateCocktails (getData, params) {
+    const resultData = await getData(params);
+    let currentPage = 1;
+    let cocktails = 3;
+    console.log("paginate");
+    if (window.innerWidth > 767 && window.innerWidth < 1280) {
+        cocktails = 6;
+      } else if (window.innerWidth > 1279) {
+        cocktails = 9;
+      }
+
+      const drawCocktails = (dataWithAllCocktails, cocktailsPerPage, page) => {
+        if (!dataWithAllCocktails.length) {
+            gallery.innerHTML = '';
+            gallery.append(templateWithoutResultText);
+          } else {
+            console.log("draw");
+
+        page -= 1; 
+
+        const start = cocktailsPerPage * page;
+        const end = start + cocktailsPerPage;
+        const paginatedCocktails = dataWithAllCocktails.slice(start, end);
+        gallery.innerHTML = /*html*/`
+      <h2>Searching results</h2>
+      <ul class="gallery__list list">
+        ${getDrinksMarkup(paginatedCocktails).join("")}
+      </ul>`;
+      }
+    }
+
+      const displayPaginationBtn = (page) => {
+      const paginationItem = document.createElement('li');
+      paginationItem.classList.add("pagination-item");
+      paginationItem.innerText = page;
+
+      if(currentPage === page) {
+        paginationItem.classList.add("pagination-item-active");
+        
+      }
+
+      paginationItem.addEventListener("click", () => {
+        currentPage = page;
+        drawCocktails(resultData, cocktails, currentPage);
+
+        let currentItemLi = document.querySelector(".pagination-item-active");
+        currentItemLi.classList.remove("pagination-item-active");
+
+        paginationItem.classList.add("pagination-item-active");
+
+      })
+      return paginationItem;
+   
+      }
+
+      const displayPagination = (dataWithAllCocktails, cocktailsPerPage) => {
+        
+
+        const numberOfPages = Math.ceil(dataWithAllCocktails.length / cocktailsPerPage);
+        console.log(numberOfPages);
+        const ulPaginationBtns = document.createElement("ul");
+        ulPaginationBtns.classList.add("pagination-list");
+
+        for(let i = 1; i <= numberOfPages; i += 1) {
+            const oneBtn = displayPaginationBtn(i); 
+            ulPaginationBtns.appendChild(oneBtn);
+
+        }
+        divPagination.innerHTML = "";
+        divPagination.appendChild(ulPaginationBtns);
+
+
+      }
+      drawCocktails(resultData, cocktails, currentPage)
+      displayPagination(resultData, cocktails);
+      
+
+    }
+
