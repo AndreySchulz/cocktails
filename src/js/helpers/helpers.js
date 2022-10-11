@@ -13,7 +13,7 @@ export const getAlphabetMarkup = (targetElement) => {
 
 export const getDrinksMarkup = (drinks) => {
     const template = drinks.map(({ idDrink, strDrink, strDrinkThumb }) => {
-        return `<li><a><img src="${strDrinkThumb}" alt="${strDrink}"/><h3>${strDrink}</h3><button id="${idDrink}" data-details>Learn more</button>${getFavoriteBtn(
+        return `<li class="gallery__item"><a><img class="gallery__img" src="${strDrinkThumb}" alt="${strDrink}"/><h3 class="gallery__text">${strDrink}</h3><button class="gallery__btn" id="${idDrink}" data-details>Learn more</button>${getFavoriteBtn(
           idDrink
         )}</a></li>`;
       });
