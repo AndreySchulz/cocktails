@@ -39,7 +39,7 @@
     display: flex;
     align-items: center;
     margin: 0;
-
+    padding: 10px 0px;
     margin-right: 60px;
     &:last-child {
       margin-right: 0;
@@ -126,9 +126,6 @@
     display: none;
   }
 }
-.header__switch {
-  //   margin: 0 12px 5px 12px;
-}
 
 .header__search {
   display: flex;
@@ -192,9 +189,6 @@
   font-size: 16px;
 }
 
-.dropdown {
-}
-
 .dropdown-content {
   margin-top: 3px;
 
@@ -209,7 +203,7 @@
   z-index: 1;
 
   @media screen and(min-width: $desktop) {
-    top: 75px;
+    top: 70px;
   }
 }
 
