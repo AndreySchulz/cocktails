@@ -22,7 +22,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    background-color: $bg-light;
+    background-color: var(--bg-color);
     z-index: 1;
 }
 
@@ -45,14 +45,18 @@
 
     &:hover,
     &:focus{
-        border: 1px solid $bg-dark;
+        border: 1px solid var(--bg-text);
     }
 }
 
 .modal__icon {
-    fill: $bg-dark;
+    fill: var(--bg-text);
 }
 
 .gallery__button {
+    @extend %button;
+}
+
+.gallery__modal-button {
     @extend %button;
 }

@@ -11,10 +11,18 @@ import { app } from './firebase';
 
 const FAVORITE_COCTAILS_KEY = 'favorite-cocktails';
 const FAVORITE_INGREDIENTS_KEY = 'favorite-ingredients';
+const FAVORITE_THEME = 'favorite-theme';
 const Cache = {
   [FAVORITE_COCTAILS_KEY]: getFavoriteFromLocalStorage(FAVORITE_COCTAILS_KEY),
-  [FAVORITE_INGREDIENTS_KEY]: getFavoriteFromLocalStorage(FAVORITE_INGREDIENTS_KEY),
+  [FAVORITE_INGREDIENTS_KEY]: getFavoriteFromLocalStorage(
+    FAVORITE_INGREDIENTS_KEY
+  ),
+  [FAVORITE_THEME]: getFavoriteThemeFromLocalStorage(FAVORITE_THEME) || 'Light',
 };
+const galleryIconBtn = document.querySelector('.gallery__icon-btn');
+galleryIconBtn.remove();
+galleryIconBtn.style.display = '';
+
 console.log(Cache);
 let userId;
 const auth = getAuth(app);
@@ -31,7 +39,9 @@ onAuthStateChanged(auth, user => {
 
 const db = getDatabase();
 function writeFavoriteData(favoriteKey, favorites) {
-  set(ref(db, `${userId}/${favoriteKey}`), favorites);
+  if (userId) {
+    set(ref(db, `${userId}/${favoriteKey}`), favorites);
+  }
 }
 
 function onReadData(favoriteKey) {
@@ -42,10 +52,19 @@ function onReadData(favoriteKey) {
     Cache[favoriteKey] = data;
   });
 }
-function getFavoriteFromLocalStorage(favoriteKey){
+function getFavoriteFromLocalStorage(favoriteKey) {
   const cocktailsString = localStorage.getItem(favoriteKey) || '[]';
   const localResult = JSON.parse(cocktailsString);
   return localResult;
+}
+function getFavoriteThemeFromLocalStorage(favoriteKey) {
+  return localStorage.getItem(favoriteKey) || 'Light';
+}
+function getFavoriteTheme() {
+  if (Cache && Cache[FAVORITE_THEME]) {
+    return Cache[FAVORITE_THEME];
+  }
+  return getFavoriteThemeFromLocalStorage(FAVORITE_THEME);
 }
 
 function getFavorite(favoriteKey) {
@@ -59,6 +78,9 @@ function getFavoriteCocktails() {
 }
 function getFavoriteIngredients() {
   return getFavorite(FAVORITE_INGREDIENTS_KEY);
+}
+function getFavoriteTheme() {
+  return getFavorite(FAVORITE_THEME);
 }
 
 function addToFavorites(favoriteKey, id) {
@@ -80,19 +102,52 @@ function addCocktailToFavorites(id) {
 function addIngredientsFavorites(id) {
   addToFavorites(FAVORITE_INGREDIENTS_KEY, id);
 }
+function saveThemeFavorites(theme) {
+  try {
+    Cache[FAVORITE_THEME] = theme;
+    localStorage.setItem(FAVORITE_THEME, Cache[FAVORITE_THEME]);
+    writeFavoriteData(FAVORITE_THEME, Cache[FAVORITE_THEME]);
+  } catch (error) {
+    console.error('Set state error: ', error.message);
+  }
+}
 
 function getFavoriteBtn(favoriteKey, id) {
   return isFavorites(favoriteKey, id)
-
-    ? /*html*/ `<button id="${id}" class="gallery__favorite" data-remove-favorite>Remove</button><button id="${id}" class="gallery__favorite is-hidden" data-add-favorite>Add to</button>`
-    : /*html*/ `<button id="${id}" class="gallery__favorite" data-add-favorite>Add to</button><button id="${id}" class="gallery__favorite is-hidden" data-remove-favorite>Remove</button>`;
-
+    ? /*html*/ `<button id="${id}" class="gallery__favorite" data-remove-favorite>
+      Remove ${galleryIconBtn.outerHTML}
+      </button><button id="${id}" class="gallery__favorite is-hidden" data-add-favorite>
+      Add to ${galleryIconBtn.outerHTML}
+      </button>`
+    : /*html*/ `<button id="${id}" class="gallery__favorite" data-add-favorite>
+      Add to ${galleryIconBtn.outerHTML}
+      </button><button id="${id}" class="gallery__favorite is-hidden" data-remove-favorite>
+      Remove ${galleryIconBtn.outerHTML}
+      </button>`;
 }
+
+function getModalFavoriteBtn(favoriteKey, id) {
+  return isFavorites(favoriteKey, id)
+    ? /*html*/ `<button id="${id}" class="gallery__modal-button" data-remove-favorite>
+      Remove from favorite
+      </button><button id="${id}" class="gallery__modal-button is-hidden" data-add-favorite>
+      Add to favorite 
+      </button>`
+    : /*html*/ `<button id="${id}" class="gallery__modal-button" data-add-favorite>
+      Add to favorite
+      </button><button id="${id}" class="gallery__modal-button is-hidden" data-remove-favorite>
+      Remove from favorite
+      </button>`;
+}
+
 function getCocktailFavoriteBtn(id) {
   return getFavoriteBtn(FAVORITE_COCTAILS_KEY, id);
 }
+function getModalCocktailFavoriteBtn(id) {
+  return getModalFavoriteBtn(FAVORITE_COCTAILS_KEY, id);
+}
 function getIngredientFavoriteBtn(id) {
-  return getFavoriteBtn(FAVORITE_INGREDIENTS_KEY, id);
+  return getModalFavoriteBtn(FAVORITE_INGREDIENTS_KEY, id);
 }
 
 function isFavorites(favoriteKey, id) {
@@ -137,4 +192,7 @@ export {
   removeIngredientsFromFavorites,
   getCocktailFavoriteBtn,
   getIngredientFavoriteBtn,
+  getModalCocktailFavoriteBtn,
+  getFavoriteTheme,
+  saveThemeFavorites,
 };

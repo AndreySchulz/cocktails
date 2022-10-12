@@ -3,7 +3,7 @@ import { renderIngredientCard } from './ingredients-modal';
 import {
   addCocktailToFavorites,
   removeCocktailFromFavorites,
-  getCocktailFavoriteBtn,
+  getModalCocktailFavoriteBtn,
 } from './favorites';
 import { createOnClickForModal } from './modal';
 
@@ -87,7 +87,7 @@ async function renderCocktailCard(id) {
       <h3 class="modal-header__subtitle">ingredients</h3>
       <p class="modal-header__text">${strInstructions}</p>
       </div>
-      ${getCocktailFavoriteBtn(idDrink)}
+      ${getModalCocktailFavoriteBtn(idDrink)}
        `;
   modalCocktailContent.innerHTML = markup;
   backDrop.classList.remove('is-hidden');
