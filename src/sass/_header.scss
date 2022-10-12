@@ -1,10 +1,6 @@
 .header {
   position: relative;
   padding: 20px 0;
-
-  @media screen and(max-width: $desktop) {
-    overflow: hidden;
-  }
 }
 .flex-box {
   display: flex;
@@ -17,7 +13,7 @@
 
 .header__icon {
   @media screen and(min-width: $tablet) {
-    z-index: 2;
+    z-index: 3;
   }
   @media screen and(min-width: $desktop) {
     margin-right: 43px;
@@ -67,7 +63,7 @@
 
 .header__navigation {
   position: absolute;
-
+  z-index: 2;
   right: -100%;
   top: 0;
   width: 100%;
