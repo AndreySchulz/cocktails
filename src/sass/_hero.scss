@@ -1,3 +1,7 @@
+.hero{
+    position: relative;
+}
+
 .hero__title {
   font-weight: 600;
   color: #fd5103;
@@ -181,13 +185,13 @@
         @media screen and (min-width: $tablet) {
             position: absolute;
             right: 0;
-            top: 120px;
+            top: -70px;
         }
     
         @media screen and (min-width: $desktop) {
             position: absolute;
             right: 0;
-            top: 120px;
+            top: -50px;
         }
     }
 
