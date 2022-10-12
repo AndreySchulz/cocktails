@@ -4,23 +4,28 @@
     margin-bottom: 40px;
 
     @media screen and (max-width: $mobile) {
+        margin-top: 60px;
         font-size: 22px;
         line-height: 42px;
         max-width: 280px;
     }
         
     @media screen and (min-width: $tablet) {
+        margin-top: 132px;
         font-size: 26px;
         line-height: 42px;
         max-width: 336px;
     }
         
     @media screen and (min-width: $desktop) {
+        margin-top: 97px;
         font-size: 52px;
         line-height: 80px;
         max-width: 688px;
     }
 }
+
+
 
 .hero__text{
     font-weight: 500;
@@ -30,11 +35,13 @@
     opacity: 0.8;
     margin-bottom: 40px;
 
-    @media screen and (max-width: $mobile) {
+    @media screen and (max-width: $tablet) {
         font-size: 18px;
+        text-align: center;
     }
     
     @media screen and (min-width: $tablet) {
+
         font-size: 14px;
     }
     
@@ -49,9 +56,11 @@
     justify-content: center;
     @media screen and (min-width: $tablet) {
         width: 324px;
+        margin-bottom: 194px;
     }
     @media screen and (min-width: $desktop) {
         width: 520px;
+        margin-bottom: 192px;
     }
 }
 
@@ -96,3 +105,23 @@
         margin-bottom: 40px;
     }
 }
+
+.hero__picture{
+        @media screen and (max-width: $tablet) {
+            display: block;
+            margin-left: auto;
+        }
+        
+        @media screen and (min-width: $tablet) {
+            position: absolute;
+            right: 0;
+            top: 120px;
+        }
+    
+        @media screen and (min-width: $desktop) {
+            position: absolute;
+            right: 0;
+            top: 120px;
+        }
+    }
+
