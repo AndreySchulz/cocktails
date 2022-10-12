@@ -10,7 +10,10 @@ import { createOnClickForModal } from './modal';
 const modalCocktailContent = document.querySelector('.modal-cocktail__content');
 const backDrop = document.querySelector('#modal-cocktail');
 
-const onClickModal = createOnClickForModal(addCocktailToFavorites, removeCocktailFromFavorites);
+const onClickModal = createOnClickForModal(
+  addCocktailToFavorites,
+  removeCocktailFromFavorites
+);
 
 backDrop.addEventListener('click', async event => {
   await onClickModal(event);
@@ -61,7 +64,7 @@ async function renderCocktailCard(id) {
     strIngredient15,
   ].filter(item => item);
 
-  const markup = /*html*/`
+  const markup = /*html*/ `
       <div class="modal-header">
         <img class="modal-header__img" src="${strDrinkThumb}" alt="${strDrink}" loading="lazy" width="280" height="280" />
         <div class="modal-header__heading">
@@ -73,7 +76,7 @@ async function renderCocktailCard(id) {
               .map(
                 item =>
                   `<li class="modal-header__item">
-                    <a href="#" class="modal-header__link" data-ingredient="${item}">${item}</a>
+                    <a href="#" class="modal-header__link" data-ingredient="${item}">✶ ${item}</a>
                   </li>`
               )
               .join('')}

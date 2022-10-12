@@ -1,6 +1,7 @@
 .header {
   padding: 20px 0;
-  overflow-x: hidden;
+
+  position: relative;
   @media screen and(min-width: $desktop) {
     position: static;
   }
