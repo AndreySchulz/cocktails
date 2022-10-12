@@ -232,17 +232,17 @@ const authBtn = document.querySelector('#authBtn');
 const boxAuthBtn = document.querySelector('#authBtnLog');
 boxAuthBtn.addEventListener('click', onAuthClickCreate(boxAuthBtn));
 
-
 const burgerBtn = document.querySelector('.header__burger');
-const burgerNavBtn = document.querySelector('#icon-menu');
-const closeNavBtn = document.querySelector('#icon-Vector');
 const nav = document.querySelector('.header__navigation');
 
-burgerBtn.addEventListener('click', (event) => {
-  console.log('nav :>> ', nav.classList.contains('is-open'));
-    if(nav.classList.contains('is-open')) {
-      nav.classList.remove('is-open')
-    } else {
-      nav.classList.add('is-open');
-    }
+burgerBtn.addEventListener('click', event => {
+  if (nav.classList.contains('is-open')) {
+    nav.classList.remove('is-open');
+    burgerBtn.firstElementChild.style.display = '';
+    burgerBtn.lastElementChild.style.display = 'none';
+  } else {
+    nav.classList.add('is-open');
+    burgerBtn.firstElementChild.style.display = 'none';
+    burgerBtn.lastElementChild.style.display = '';
+  }
 });
