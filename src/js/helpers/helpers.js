@@ -39,11 +39,25 @@ const alphabet = [
   0,
 ];
 
-export const getAlphabetMarkup = targetElement => {
-  const template = alphabet.map(item => {
+export const getAlphabetMarkup = targetElements => {
+  const templateUl = alphabet.map(item => {
     return `<li><span class="letterInLi">${item}</span></li>`;
   });
-  targetElement.innerHTML = template.join('');
+  const templateSelect = alphabet.map(item => {
+    return `<option value="${item}">${item}</option>`;
+  });
+
+  targetElements.forEach(element => {
+    if (element.tagName.toLowerCase() === 'ul') {
+      element.innerHTML = templateUl.join('');
+    }
+    if (element.tagName.toLowerCase() === 'select') {
+      element.innerHTML = templateSelect.join('');
+    }
+  });
+
+  //   targetElement.innerHTML = template.join('');
+  //   targetElement.innerHTML = template.join('');
 };
 
 export const getDrinksMarkup = drinks => {
@@ -55,7 +69,9 @@ export const getDrinksMarkup = drinks => {
         <h3 class="gallery__text">${strDrink}</h3>
         <div>
           <button id="${idDrink}" class="gallery__button" data-details>Learn more</button>
-          ${getCocktailFavoriteBtn(idDrink)}
+         
+          ${getCocktailFavoriteBtn(idDrink)} 
+
         </div>
       </div>
     </li>`;
