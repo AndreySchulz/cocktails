@@ -10,7 +10,10 @@ import { createOnClickForModal } from './modal';
 const modalCocktailContent = document.querySelector('.modal-cocktail__content');
 const backDrop = document.querySelector('#modal-cocktail');
 
-const onClickModal = createOnClickForModal(addCocktailToFavorites, removeCocktailFromFavorites);
+const onClickModal = createOnClickForModal(
+  addCocktailToFavorites,
+  removeCocktailFromFavorites
+);
 
 backDrop.addEventListener('click', async event => {
   await onClickModal(event);
@@ -61,23 +64,31 @@ async function renderCocktailCard(id) {
     strIngredient15,
   ].filter(item => item);
 
-  const markup = `
-      <h2 class="content__title">${strDrink}</h2>
-      <h3 class="content__subtitle">instractions:</h3>
-      <p class="content__text">${strInstructions}</p>
-      <img class="" src="${strDrinkThumb}" alt="${strDrink}" loading="lazy" width="280" height="280" />
-      <h3 class="content__subtitle">ingredients</h3>
-      <p class="content__label">per cocktail</p>
-      <ul class="content__list">
-     ${ingredients
-       .map(
-         item =>
-           `<li class="content__item"><a href="#" class="content__link" data-ingredient="${item}">${item}</a></li>`
-       )
-       .join('')}
-    </ul>
-    ${getCocktailFavoriteBtn(idDrink)}
-      `;
+  const markup = /*html*/ `
+      <div class="modal-header">
+        <img class="modal-header__img" src="${strDrinkThumb}" alt="${strDrink}" loading="lazy" width="280" height="280" />
+        <div class="modal-header__heading">
+          <h2 class="modal-header__title">${strDrink}</h2>
+          <h3 class="modal-header__subtitle">instractions:</h3>
+          <p class="modal-header__text">Per cocktail</p>
+          <ul class="modal-header__list">
+            ${ingredients
+              .map(
+                item =>
+                  `<li class="modal-header__item">
+                    <a href="#" class="modal-header__link" data-ingredient="${item}">✶ ${item}</a>
+                  </li>`
+              )
+              .join('')}
+          </ul>
+        </div>
+      </div>
+      <div class="modal-header">
+      <h3 class="modal-header__subtitle">ingredients</h3>
+      <p class="modal-header__text">${strInstructions}</p>
+      </div>
+      ${getCocktailFavoriteBtn(idDrink)}
+       `;
   modalCocktailContent.innerHTML = markup;
   backDrop.classList.remove('is-hidden');
 }

@@ -20,6 +20,7 @@ import {
 
 import { onAuthClickCreate } from './js/firebase';
 
+const mobileSelectEl = document.querySelector('.hero__select');
 const searchMobileForm = document.querySelector('#mobile-form');
 const searchForm = document.querySelector('#form');
 const searchMobileField = document.querySelector('#mobile-input');
@@ -56,7 +57,7 @@ favoriteIngredients.addEventListener('click', event => {
   showFavoritesIngredients(event);
 });
 
-getAlphabetMarkup(alphabetUl);
+getAlphabetMarkup([alphabetUl, mobileSelectEl]);
 
 searchMobileForm.addEventListener('submit', async event => {
   event.preventDefault();
@@ -94,24 +95,20 @@ searchForm.addEventListener('submit', async event => {
   //     </ul>`;
 });
 
+mobileSelectEl.addEventListener('change', async event => {
+  console.log(event.target.value);
+  const resultLetter = event.target.value;
+
+  paginateCocktails(searchByFirstLetter, resultLetter);
+});
+
 alphabetUl.addEventListener('click', async event => {
   if (event.target.classList.contains('letterInLi')) {
     clearLetters();
     event.target.classList.add('letterInLi--active');
     const resultLetter = event.target.textContent;
-    const drinks = await searchByFirstLetter(resultLetter);
 
-    if (!drinks.length) {
-      gallery.innerHTML = '';
-      gallery.append(templateWithoutResultText);
-    } else {
-      const template = getDrinksMarkup(drinks);
-      gallery.innerHTML = /*html*/ `
-        <h2 class="gallery__title">Searching results</h2>
-        <ul class="gallery__list list">
-          ${template.join('')}
-        </ul>`;
-    }
+    paginateCocktails(searchByFirstLetter, resultLetter);
   }
 });
 
@@ -231,6 +228,21 @@ async function paginateCocktails(getData, params) {
   displayPagination(resultData, cocktails);
 }
 
-//const authBtn = document.querySelector('#authBtn');
+const authBtn = document.querySelector('#authBtn');
 const boxAuthBtn = document.querySelector('#authBtnLog');
 boxAuthBtn.addEventListener('click', onAuthClickCreate(boxAuthBtn));
+
+const burgerBtn = document.querySelector('.header__burger');
+const nav = document.querySelector('.header__navigation');
+
+burgerBtn.addEventListener('click', event => {
+  if (nav.classList.contains('is-open')) {
+    nav.classList.remove('is-open');
+    burgerBtn.firstElementChild.style.display = '';
+    burgerBtn.lastElementChild.style.display = 'none';
+  } else {
+    nav.classList.add('is-open');
+    burgerBtn.firstElementChild.style.display = 'none';
+    burgerBtn.lastElementChild.style.display = '';
+  }
+});

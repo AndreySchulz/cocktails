@@ -1,7 +1,7 @@
 .header {
-  position: relative;
   padding: 20px 0;
-  overflow-x: hidden;
+
+  position: relative;
   @media screen and(min-width: $desktop) {
     position: static;
   }
@@ -122,6 +122,7 @@
 
 .header__burger {
   z-index: 2;
+  cursor: pointer;
   @media screen and(min-width: $desktop) {
     display: none;
   }

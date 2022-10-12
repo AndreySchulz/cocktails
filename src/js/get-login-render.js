@@ -6,7 +6,7 @@ export function getRenderLogin(url) {
   const templateUrl = /*html*/ `
         <div class="dropdown-content">
             <a id="logout" class="dropdown-content__link" href="#" data-cocktails>
-                Login out
+                Log out
             </a>
         </div> `;
   return templateUrl;
