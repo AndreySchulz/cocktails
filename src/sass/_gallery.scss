@@ -173,26 +173,6 @@
     margin-left: 16px;
 }
 
-.gallery__heart{
-    fill: $bg-light;
-    @media screen and (max-width: $tablet) {
-        width: 18px;
-        height: 18px;
-    }
-    @media screen and(min-width: $tablet) {
-        width: 17px;
-        height: 15px;
-    }
-
-    @media screen and(min-width: $desktop) {
-        width: 21px;
-        height: 19px;
-    }
-
-  display: flex;
-
-}
-
 .content__title{
     font-weight: 900;
     font-size: 32px;
@@ -213,4 +193,24 @@
 
 .content__box{
     padding: 0 28px 26px 28px;
+}
+
+.gallery__heart {
+    display: flex;
+    fill: $bg-light;
+
+    @media screen and (max-width: $tablet) {
+        width: 18px;
+        height: 18px;
+    }
+
+    @media screen and(min-width: $tablet) {
+        width: 17px;
+        height: 15px;
+    }
+
+    @media screen and(min-width: $desktop) {
+        width: 21px;
+        height: 19px;
+    }
 }
