@@ -185,3 +185,45 @@
 }
 
 
+.content__title{
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 38px;
+    color: $bg-dark;
+    padding-top: 30px;
+    padding-left: 28px;
+}
+
+.content__subtitle{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: $text-gray;
+    padding: 28px 0 28px 28px;
+}
+
+.content__box{
+    padding: 0 28px 26px 28px;
+}
+
+.gallery__heart {
+    display: flex;
+    fill: $bg-light;
+
+    @media screen and (max-width: $tablet) {
+        width: 18px;
+        height: 18px;
+    }
+
+    @media screen and(min-width: $tablet) {
+        width: 17px;
+        height: 15px;
+    }
+
+    @media screen and(min-width: $desktop) {
+        width: 21px;
+        height: 19px;
+    }
+}
+
