@@ -51,17 +51,17 @@
 
   @media screen and (max-width: $mobile) {
     width: 278px;
-    height: 280px;
+    
   }
 
   @media screen and (min-width: $tablet) {
     width: 333px;
-    height: 395px;
+    
   }
 
   @media screen and (min-width: $desktop) {
     width: 393px;
-    height: 395px;
+    
   }
 }
 
@@ -151,10 +151,6 @@
     display: flex;
 }
 
-.gallery__box{
-    text-align: center;
-    margin: 20px 28px 28px 28px;
-}
 
 .gallery__button-transparent{
     text-align: center;
@@ -174,22 +170,4 @@
     margin-left: 16px;
 }
 
-.gallery__heart{
-    fill: $bg-light;
-    @media screen and (max-width: $tablet) {
-        width: 18px;
-        height: 18px;
-    }
-    @media screen and(min-width: $tablet) {
-        width: 17px;
-        height: 15px;
-    }
 
-    @media screen and(min-width: $desktop) {
-        width: 21px;
-        height: 19px;
-    }
-
-  display: flex;
-
-}
