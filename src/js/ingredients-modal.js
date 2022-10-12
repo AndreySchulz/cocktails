@@ -58,8 +58,10 @@ function getIngredientsMarkup(ingredients) {
     <li class="gallery__item">
       <h2 class="content__title">${strIngredient}</h2>
       <h3 class="content__subtitle">${strType || 'None'}</h3>
-      <button id="${strIngredient}" class="gallery__button" data-ingredient-details>Learn more</button>
-      ${getIngredientFavoriteBtn(idIngredient)}
+      <div class="content__box">
+        <button id="${strIngredient}" class="gallery__button" data-ingredient-details>Learn more</button>
+        ${getIngredientFavoriteBtn(idIngredient)}
+      </div>
     </li>`
   );
 }
