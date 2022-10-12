@@ -1,15 +1,4 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  getRedirectResult,
-  onAuthStateChanged,
-  signOut,
-} from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
-
 import { Notify } from 'notiflix';
 import {
   searchCocktails,
@@ -29,10 +18,7 @@ import {
   showFavoritesIngredients,
 } from './js/favorites-cards';
 
-
 import { onAuthClickCreate } from './js/firebase';
-// Your web app's Firebase configuration
-
 
 const searchMobileForm = document.querySelector('#mobile-form');
 const searchForm = document.querySelector('#form');
@@ -49,9 +35,26 @@ templateWithoutResultText.classList.remove('is-hidden');
 const favoriteCocktails = document.querySelector('[data-cocktails]');
 const favoriteIngredients = document.querySelector('[data-ingredients]');
 const divPagination = document.querySelector('.pagination-markup');
+const heroContainer = document.querySelector('.hero');
 
-favoriteCocktails.addEventListener('click', showFavoritesCocktails);
-favoriteIngredients.addEventListener('click', showFavoritesIngredients);
+function showHeroContainer() {
+  heroContainer.classList.remove('is-hidden');
+}
+
+function hiddenHeroContainer() {
+  heroContainer.classList.add('is-hidden');
+}
+
+favoriteCocktails.addEventListener('click', event => {
+  clearLetters();
+  hiddenHeroContainer();
+  showFavoritesCocktails(event);
+});
+favoriteIngredients.addEventListener('click', event => {
+  clearLetters();
+  hiddenHeroContainer();
+  showFavoritesIngredients(event);
+});
 
 getAlphabetMarkup(alphabetUl);
 
@@ -64,7 +67,10 @@ searchMobileForm.addEventListener('submit', async event => {
     return;
   }
 
+  showHeroContainer();
+  clearLetters();
   paginateCocktails(searchCocktails, cocktailName);
+  event.target.elements[`mobile-input`].value = '';
 });
 
 searchForm.addEventListener('submit', async event => {
@@ -76,17 +82,22 @@ searchForm.addEventListener('submit', async event => {
     return;
   }
 
+  showHeroContainer();
+  clearLetters();
   paginateCocktails(searchCocktails, cocktailName);
+  event.target.elements[`input`].value = '';
 
-  gallery.innerHTML = /*html*/ `
-      <h2 class="gallery__title">Searching results</h2>
-      <ul class="gallery__list list">
-        ${template.join('')}
-      </ul>`;
+  // gallery.innerHTML = /*html*/ `
+  //     <h2 class="gallery__title">Searching results</h2>
+  //     <ul class="gallery__list list">
+  //       ${template.join('')}
+  //     </ul>`;
 });
 
 alphabetUl.addEventListener('click', async event => {
   if (event.target.classList.contains('letterInLi')) {
+    clearLetters();
+    event.target.classList.add('letterInLi--active');
     const resultLetter = event.target.textContent;
     const drinks = await searchByFirstLetter(resultLetter);
 
@@ -103,6 +114,12 @@ alphabetUl.addEventListener('click', async event => {
     }
   }
 });
+
+function clearLetters() {
+  [...alphabetUl.querySelectorAll('.letterInLi--active')].forEach(item =>
+    item.classList.remove('letterInLi--active')
+  );
+}
 
 gallery.addEventListener('click', async event => {
   const addBtn = event.target.closest('[data-add-favorite]');
@@ -167,7 +184,7 @@ async function paginateCocktails(getData, params) {
       const end = start + cocktailsPerPage;
       const paginatedCocktails = dataWithAllCocktails.slice(start, end);
       gallery.innerHTML = /*html*/ `
-      <h2>Searching results</h2>
+      <h2 class="gallery__title">Searching results</h2>
       <ul class="gallery__list list">
         ${getDrinksMarkup(paginatedCocktails).join('')}
       </ul>`;
@@ -217,5 +234,3 @@ async function paginateCocktails(getData, params) {
 //const authBtn = document.querySelector('#authBtn');
 const boxAuthBtn = document.querySelector('#authBtnLog');
 boxAuthBtn.addEventListener('click', onAuthClickCreate(boxAuthBtn));
-
-

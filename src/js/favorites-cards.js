@@ -10,7 +10,7 @@ async function showFavoritesCocktails() {
   const template = getDrinksMarkup(list);
   console.log(template);
   gallery.innerHTML = /*html*/`
-    <h2>Favorite cocktails</h2>
+    <h2 class="gallery__title">Favorite cocktails</h2>
     <ul class="gallery__list list">
       ${template.join('')}
     </ul>`;
