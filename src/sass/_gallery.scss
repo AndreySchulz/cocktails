@@ -66,6 +66,9 @@
 }
 
 .gallery__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 48px 21px 24px 21px;
 
   @media screen and (min-width: $tablet) {
@@ -80,8 +83,9 @@
   font-style: normal;
   font-weight: 900;
   text-align: center;
-  color: $bg-dark;
+
   margin-bottom: 27px;
+  height: 40px;
 
   @media screen and (max-width: $mobile) {
     font-size: 26px;
@@ -96,13 +100,13 @@
   @media screen and (min-width: $desktop) {
     font-size: 32px;
     line-height: 38px;
+    height: 50px;
   }
 }
 
 .gallery__button {
   padding: 7px 16px;
   @media screen and (min-width: $tablet) {
-    margin-right: 8px;
     padding: 12px 20px;
     width: 160px;
   }
