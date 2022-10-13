@@ -98,13 +98,18 @@
     height: 50px;
   }
 }
-
+.gallery__box-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 .gallery__button {
   margin-right: 13px;
   padding: 11px 18px;
   font-size: 14px;
   @media screen and (min-width: $tablet) {
-    margin-right: 8px;
+    // margin-right: 8px;
     padding: 12px 28px;
 
     font-size: 20px;
@@ -115,7 +120,8 @@
   }
 }
 .gallery__favorite {
-  padding: 5px 17px;
+  width: 114px;
+  padding: 5px 13px;
   border-radius: 4px;
   border: 2px solid $bg-btn;
   background-color: transparent;
