@@ -106,11 +106,13 @@
 }
 .gallery__button {
   margin-right: 13px;
-  padding: 11px 18px;
+  padding: 11px 17px;
   font-size: 14px;
+  width: 108px;
   @media screen and (min-width: $tablet) {
     // margin-right: 8px;
     padding: 12px 28px;
+    width: auto;
 
     font-size: 20px;
   }
