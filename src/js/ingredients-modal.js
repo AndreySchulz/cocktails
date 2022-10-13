@@ -18,14 +18,6 @@ const onClickModal = createOnClickForModal(
 
 backDrop.addEventListener('click', onClickModal);
 
-
-
-// async function showFavoritesIngredient() {
-//     let list = await Promise.all(getFavoriteCocktails().map(id => searchById(id)));
-//     list = list.filter(item => item);
-//     console.log(list);
-//   }
-
 async function renderIngredientCard(ingredient) {
   console.log(ingredient);
   const {
@@ -36,7 +28,7 @@ async function renderIngredientCard(ingredient) {
     strAlcohol,
     strABV,
   } = await searchIngredientByName(ingredient);
-  const markup = /*html*/`
+  const markup = /*html*/ `
       <h2 class="content__title">${strIngredient}</h2>
       <h3 class="content__subtitle">${strType || 'None'}</h3>
       <p class="content__text">${strDescription}</p>
@@ -54,11 +46,11 @@ async function renderIngredientCard(ingredient) {
 
 function getIngredientsMarkup(ingredients) {
   return ingredients.map(
-    ({ idIngredient, strIngredient, strType }) => /*html*/`
+    ({ idIngredient, strIngredient, strType }) => /*html*/ `
     <li class="gallery__item">
       <h2 class="content__title">${strIngredient}</h2>
       <h3 class="content__subtitle">${strType || 'None'}</h3>
-      <div class="content__box">
+      <div class="content__box" data-ingredient-btns>
         <button id="${strIngredient}" class="gallery__button" data-ingredient-details>Learn more</button>
         ${getIngredientFavoriteBtn(idIngredient)}
       </div>
