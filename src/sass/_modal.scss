@@ -18,12 +18,9 @@
 
 .modal {
   position: absolute;
-
   width: 100%;
   min-height: 100vh;
-
   padding: 40px 20px 20px 20px;
-
   background-color: var(--bg-color);
   z-index: 1;
   @media screen and(min-width:$tablet) {
@@ -118,12 +115,12 @@
   }
 
   &__text {
-    margin-bottom: 32px;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.5;
-    @media screen and(min-width:$tablet) {
-      margin-bottom: 80px;
+    margin-bottom: 8px;
+    @media screen and(min-width: $tablet) {
+      margin-bottom: 32px;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.5;
     }
   }
 
@@ -143,6 +140,7 @@
 .modal-header--bottom {
   @media screen and(max-width:$tablet) {
     margin-top: 57px;
+    margin-bottom: 32px;
   }
 }
 .gallery__modal-button {
