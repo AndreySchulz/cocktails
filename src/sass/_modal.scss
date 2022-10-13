@@ -18,17 +18,15 @@
 
 .modal {
   position: absolute;
-
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 40px 20px 20px 20px;
   width: 100%;
   min-height: 100vh;
-
+  padding: 40px 20px 20px 20px;
   background-color: var(--bg-color);
   z-index: 1;
   @media screen and(min-width:$tablet) {
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
     width: 760px;
     min-height: 598px;
     padding: 40px 28px 28px 28px;
