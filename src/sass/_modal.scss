@@ -22,14 +22,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-
-  width: 822px;
-  min-height: 598px;
-  max-height: 100vh;
-
-  padding: 40px 28px 28px 28px;
-
+  padding: 40px 20px 20px 20px;
+  width: 100%;
+  min-height: 100vh;
 
   background-color: var(--bg-color);
   z-index: 1;
