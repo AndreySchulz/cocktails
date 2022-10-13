@@ -37,7 +37,6 @@
   font-weight: 500;
   line-height: 28px;
   letter-spacing: 0.02em;
-  color: #202025;
   opacity: 0.8;
   margin-bottom: 40px;
 
@@ -72,23 +71,6 @@
     line-height: 80px;
     max-width: 688px;
     width: 520px;
-  }
-}
-
-.hero__text {
-  font-weight: 500;
-  line-height: 28px;
-  letter-spacing: 0.02em;
-  opacity: 0.8;
-  margin-bottom: 40px;
-  font-size: 18px;
-
-  @media screen and (min-width: $tablet) {
-    font-size: 14px;
-  }
-
-  @media screen and (min-width: $desktop) {
-    font-size: 18px;
   }
 }
 
