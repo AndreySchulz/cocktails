@@ -72,10 +72,12 @@
 
   &__img {
     width: 288px;
+    margin-right: 32px;
     position: relative;
     top: -40px;
     left: -28px;
-    margin-right: 32px;
+    height: 320px;
+    object-fit: fill;
   }
   &__title {
     margin-bottom: 28px;
