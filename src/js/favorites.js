@@ -1,12 +1,5 @@
 import { getDatabase, ref, set, onValue } from 'firebase/database';
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  getRedirectResult,
-  onAuthStateChanged,
-  signOut,
-} from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { app } from './firebase';
 
 const FAVORITE_COCTAILS_KEY = 'favorite-cocktails';
@@ -147,9 +140,11 @@ function getModalCocktailFavoriteBtn(id) {
   return getModalFavoriteBtn(FAVORITE_COCTAILS_KEY, id);
 }
 function getIngredientFavoriteBtn(id) {
+  return getFavoriteBtn(FAVORITE_INGREDIENTS_KEY, id);
+}
+function getModalIngredientFavoriteBtn(id) {
   return getModalFavoriteBtn(FAVORITE_INGREDIENTS_KEY, id);
 }
-
 function isFavorites(favoriteKey, id) {
   const favorites = getFavorite(favoriteKey);
   return favorites.indexOf(id) != -1 ? true : false;
@@ -195,4 +190,5 @@ export {
   getModalCocktailFavoriteBtn,
   getFavoriteTheme,
   saveThemeFavorites,
+  getModalIngredientFavoriteBtn,
 };

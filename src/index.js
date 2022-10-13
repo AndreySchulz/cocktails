@@ -11,6 +11,8 @@ import {
   removeCocktailFromFavorites,
   saveThemeFavorites,
   getFavoriteTheme,
+  addIngredientsFavorites,
+  removeIngredientsFromFavorites,
 } from './js/favorites';
 import { renderCocktailCard } from './js/coctail-modal';
 import { renderIngredientCard } from './js/ingredients-modal';
@@ -122,7 +124,9 @@ function clearLetters() {
 gallery.addEventListener('click', async event => {
   const addBtn = event.target.closest('[data-add-favorite]');
   if (addBtn) {
-    addCocktailToFavorites(addBtn.id);
+    addBtn.closest('[data-ingredient-btns]')
+      ? addIngredientsFavorites(addBtn.id)
+      : addCocktailToFavorites(addBtn.id);
     addBtn.classList.add('is-hidden');
     addBtn.parentNode
       .querySelector('[data-remove-favorite]')
@@ -130,7 +134,9 @@ gallery.addEventListener('click', async event => {
   }
   const removeBtn = event.target.closest('[data-remove-favorite]');
   if (removeBtn) {
-    removeCocktailFromFavorites(removeBtn.id);
+    removeBtn.closest('[data-ingredient-btns]')
+      ? removeIngredientsFromFavorites(removeBtn.id)
+      : removeCocktailFromFavorites(removeBtn.id);
     removeBtn.classList.add('is-hidden');
     removeBtn.parentNode
       .querySelector('[data-add-favorite]')
