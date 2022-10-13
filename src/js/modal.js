@@ -1,17 +1,32 @@
 const gallery = document.querySelector('#gallery');
+const modalCocktailBackDrop = document.querySelector('#modal-cocktail');
 
 function createOnClickForModal(addToFavorites, removeFromFavorites) {
   return async function (event) {
     const backDrop = event.currentTarget;
     if (event.target == backDrop) {
+      if (
+        modalCocktailBackDrop == backDrop ||
+        modalCocktailBackDrop.classList.contains('is-hidden')
+      ) {
+        document.body.style.overflow = '';
+      }
       backDrop.classList.add('is-hidden');
       return;
     }
+
     const closeBtn = event.target.closest('[data-modal-close]');
     if (closeBtn) {
+      if (
+        modalCocktailBackDrop == backDrop ||
+        modalCocktailBackDrop.classList.contains('is-hidden')
+      ) {
+        document.body.style.overflow = '';
+      }
       backDrop.classList.add('is-hidden');
       return;
     }
+
     const addFavoriteBtn = event.target.closest('[data-add-favorite]');
     if (addFavoriteBtn) {
       addToFavorites(addFavoriteBtn.id);

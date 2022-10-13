@@ -43,6 +43,8 @@ async function renderIngredientCard(ingredient) {
     `;
   modalIngredientContent.innerHTML = markup;
   backDrop.classList.remove('is-hidden');
+  document.body.style.overflow = 'hidden';
+  // modalIngredientContent.style.overflow = 'auto';
 }
 
 function getIngredientsMarkup(ingredients) {

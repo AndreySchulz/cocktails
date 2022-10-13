@@ -91,6 +91,7 @@ async function renderCocktailCard(id) {
        `;
   modalCocktailContent.innerHTML = markup;
   backDrop.classList.remove('is-hidden');
+  document.body.style.overflow = 'hidden';
 }
 
 export { renderCocktailCard };
