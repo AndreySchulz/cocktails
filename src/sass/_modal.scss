@@ -15,6 +15,9 @@
   opacity: 1;
   visibility: hidden;
 }
+.modal::after {
+  display: none;
+}
 
 .modal {
   position: absolute;
