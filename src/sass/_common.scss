@@ -1,7 +1,7 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
 
 .is-hidden {
-  display: none;
+  display: none !important;
 }
 // .visually-hidden {
 //     position: absolute;

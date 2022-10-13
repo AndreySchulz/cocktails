@@ -35,8 +35,15 @@
     <ul id="alphabet" class="hero__alphabet"></ul>
 
     <div class="select-box">
-      <div class="select__header">A</div>
-      <select name="select" class="hero__select" size="4"></select>
+      <div class="select__header">
+        <span>A</span>
+        <svg class="select__icon" width="24" height="24">
+          <use
+            href="./images/symbol-defs-close.svg#icon-mdi-light_chevron-down"
+          ></use>
+        </svg>
+      </div>
+      <select name="select" class="hero__select is-hidden" size="4"></select>
     </div>
   </div>
 </section>

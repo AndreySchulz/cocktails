@@ -6,6 +6,7 @@ import {
   getModalCocktailFavoriteBtn,
 } from './favorites';
 import { createOnClickForModal } from './modal';
+import { disableScroll } from './mobile-nav';
 
 const modalCocktailContent = document.querySelector('.modal-cocktail__content');
 const backDrop = document.querySelector('#modal-cocktail');
@@ -91,7 +92,7 @@ async function renderCocktailCard(id) {
        `;
   modalCocktailContent.innerHTML = markup;
   backDrop.classList.remove('is-hidden');
-  document.body.style.overflow = 'hidden';
+  disableScroll();
 }
 
 export { renderCocktailCard };
