@@ -25,6 +25,7 @@
 
   width: 822px;
   min-height: 598px;
+  max-height: 100vh;
 
   padding: 40px 28px 28px 28px;
 
@@ -134,9 +135,21 @@
     line-height: 1.5;
     text-transform: uppercase;
   }
-  .modal-header__text,
+  .modal-header__text {
+    color: $text-gray;
+
+    @media screen and (min-width: $tablet) {
+      overflow: auto;
+      max-height: calc(100vh - 515px);
+    }
+  }
+
   .content__text {
     color: $text-gray;
+    @media screen and (min-width: $tablet) {
+      overflow: auto;
+      max-height: calc(100vh - 445px);
+    }
   }
   .modal-header__list,
   .content__list {
