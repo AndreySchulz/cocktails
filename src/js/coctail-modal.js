@@ -69,7 +69,7 @@ async function renderCocktailCard(id) {
         <img class="modal-header__img" src="${strDrinkThumb}" alt="${strDrink}" loading="lazy" width="280" height="280" />
         <div class="modal-header__heading">
           <h2 class="modal-header__title">${strDrink}</h2>
-          <h3 class="modal-header__subtitle">instractions:</h3>
+          <h3 class="modal-header__subtitle">ingredients</h3>
           <p class="modal-header__text">Per cocktail</p>
           <ul class="modal-header__list">
             ${ingredients
@@ -83,8 +83,8 @@ async function renderCocktailCard(id) {
           </ul>
         </div>
       </div>
-      <div class="modal-header">
-      <h3 class="modal-header__subtitle">ingredients</h3>
+      <div class="modal-header--bottom">
+      <h3 class="modal-header__subtitle">instractions:</h3>
       <p class="modal-header__text">${strInstructions}</p>
       </div>
       ${getModalCocktailFavoriteBtn(idDrink)}
