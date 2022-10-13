@@ -118,30 +118,30 @@
 .modal-ingredient__content {
   margin-bottom: 116px;
 
-
-.modal-header__title,
-.content__title {
-  font-family: $font-roboto;
-  font-weight: 900;
-  font-size: 32px;
-  line-height: 1.187;
-}
-.modal-header__subtitle,
-.content__subtitle {
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
-.modal-header__text,
-.content__text {
-  color: $text-gray;
-}
-.modal-header__list,
-.content__list {
-  line-height: 1.62;
-  color: $text-gray;
-}
-.content__item {
-  line-height: 1.62;
+  .modal-header__title,
+  .content__title {
+    font-family: $font-roboto;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 1.187;
+  }
+  .modal-header__subtitle,
+  .content__subtitle {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+  .modal-header__text,
+  .content__text {
+    color: $text-gray;
+  }
+  .modal-header__list,
+  .content__list {
+    line-height: 1.62;
+    color: $text-gray;
+  }
+  .content__item {
+    line-height: 1.62;
+  }
 }
