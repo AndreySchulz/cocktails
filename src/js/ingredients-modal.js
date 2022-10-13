@@ -4,24 +4,23 @@ import {
   getIngredientFavoriteBtn,
   getModalIngredientFavoriteBtn,
 } from './favorites';
+import { elements as el } from './elements';
 import { createOnClickForModal } from './modal';
-import { searchIngredientByName, searchById } from './helpers/api';
-import { disableScroll, enableScroll } from './mobile-nav';
+import { searchIngredientByName } from './helpers/api';
+import { disableScroll } from './mobile-nav';
 
 const modalIngredientContent = document.querySelector(
   '.modal-ingredient__content'
 );
-const backDrop = document.querySelector('#modal-ingredient');
 
 const onClickModal = createOnClickForModal(
   addIngredientsFavorites,
   removeIngredientsFromFavorites
 );
 
-backDrop.addEventListener('click', onClickModal);
+el.backDropModalIngredients.addEventListener('click', onClickModal);
 
 async function renderIngredientCard(ingredient) {
-  console.log(ingredient);
   const {
     idIngredient,
     strIngredient,
@@ -43,7 +42,7 @@ async function renderIngredientCard(ingredient) {
     ${getModalIngredientFavoriteBtn(idIngredient)}
     `;
   modalIngredientContent.innerHTML = markup;
-  backDrop.classList.remove('is-hidden');
+  el.backDropModalIngredients.classList.remove('is-hidden');
   disableScroll();
 }
 

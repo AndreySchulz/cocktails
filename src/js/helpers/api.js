@@ -5,7 +5,6 @@ axios.defaults.baseURL = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
 export const searchCocktails = async cocktailName => {
   const response = await axios.get(`search.php?key=1&s=${cocktailName}`);
-  // console.log(response);
   if (response.status >= 400) {
     Notify.failure('Something is wrong...');
     return [];
@@ -17,7 +16,6 @@ export const searchCocktails = async cocktailName => {
 
 export const searchByFirstLetter = async letter => {
   const response = await axios.get(`search.php?key=1&f=${letter}`);
-  // console.log(response);
   if (response.status >= 400) {
     Notify.failure('Something is wrong...');
     return [];
