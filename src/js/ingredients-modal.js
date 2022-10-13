@@ -2,6 +2,7 @@ import {
   addIngredientsFavorites,
   removeIngredientsFromFavorites,
   getIngredientFavoriteBtn,
+  getModalIngredientFavoriteBtn,
 } from './favorites';
 import { createOnClickForModal } from './modal';
 import { searchIngredientByName, searchById } from './helpers/api';
@@ -30,15 +31,15 @@ async function renderIngredientCard(ingredient) {
   } = await searchIngredientByName(ingredient);
   const markup = /*html*/ `
       <h2 class="content__title">${strIngredient}</h2>
-      <h3 class="content__subtitle">${strType || 'None'}</h3>
-      <p class="content__text">${strDescription}</p>
+      <h3 class="content__subtitle">${strType || 'No information'}</h3>
+      <p class="content__text">${strDescription || 'No information'}</p>
       <ul class="content__list">
-        <li class="content__item">Type:	</li>
-        <li class="content__item">Country of origin: </li>
-        <li class="content__item">Alcohol by volume: ${strABV}</li>
-        <li class="content__item">Flavour:	</li>
+        <li class="content__item">✶ Type:	No information</li>
+        <li class="content__item">✶ Country of origin: No information</li>
+        <li class="content__item">✶ Alcohol by volume: ${strABV}</li>
+        <li class="content__item">✶ Flavour:	No information</li>
     </ul>
-    ${getIngredientFavoriteBtn(idIngredient)}
+    ${getModalIngredientFavoriteBtn(idIngredient)}
     `;
   modalIngredientContent.innerHTML = markup;
   backDrop.classList.remove('is-hidden');
