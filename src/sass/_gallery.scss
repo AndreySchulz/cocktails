@@ -211,7 +211,20 @@ font-family: 'Roboto';
 }
 
 .content__box {
-  padding: 0 28px 26px 28px;
+  
+    @media screen and (max-width: $tablet) {
+        padding: 0 20px 20px 20px;
+    }
+
+    @media screen and(min-width: $tablet) {
+            display: flex;
+        padding: 0 20px 20px 20px;
+    }
+
+    @media screen and(min-width: $desktop) {
+            display: flex;
+        padding: 0 28px 26px 28px;
+    }
 }
 
 .gallery__heart {
@@ -232,4 +245,18 @@ font-family: 'Roboto';
     width: 21px;
     height: 19px;
   }
+}
+
+.gallery__card-width{
+    @media screen and (max-width: $tablet) {
+        min-width: 280px;
+    }
+    
+    @media screen and(min-width: $tablet) {
+        width: 336px;
+    }
+    
+    @media screen and(min-width: $desktop) {
+        width: 395px;
+    }
 }
