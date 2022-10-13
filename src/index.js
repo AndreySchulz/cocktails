@@ -265,10 +265,31 @@ toggleSwitch.addEventListener('change', event => {
 function setLightTheme() {
   document.documentElement.style.setProperty('--bg-color', '#FCFCFC');
   document.documentElement.style.setProperty('--bg-text', '#202025');
+  document.documentElement.style.setProperty('--modal-text-color', '#5f6775');
   saveThemeFavorites('Light');
 }
 function setDarkTheme() {
   document.documentElement.style.setProperty('--bg-color', '#202025');
   document.documentElement.style.setProperty('--bg-text', '#FCFCFC');
+  document.documentElement.style.setProperty('--modal-text-color', '#FCFCFC');
   saveThemeFavorites('Dark');
 }
+
+const selectBtn = document.querySelector('.select__header');
+const selectInput = document.querySelector('.hero__select');
+
+selectBtn.addEventListener('click', () => {
+  selectInput.classList.remove('is-hidden');
+  selectInput.focus();
+});
+
+selectInput.addEventListener('click', selectEvent);
+function selectEvent(event) {
+  selectInput.classList.add('is-hidden');
+  selectBtn.classList.add('is-active');
+  selectBtn.firstElementChild.textContent = event.target.value;
+}
+
+selectInput.addEventListener('blur', event =>
+  selectInput.classList.add('is-hidden')
+);

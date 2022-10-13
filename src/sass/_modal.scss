@@ -18,7 +18,7 @@
 
 .modal {
   position: absolute;
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
   padding: 40px 20px 20px 20px;
   background-color: var(--bg-color);
@@ -119,6 +119,7 @@
     font-weight: 300;
     font-size: 14px;
     line-height: 1.5;
+    color: var(--modal-text-color);
     @media screen and(min-width:$tablet) {
       margin-bottom: 80px;
     }
@@ -130,7 +131,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 1.62;
-    color: $text-gray;
+    color: var(--modal-text-color);
     &:hover {
       color: $main-orange;
       text-shadow: 0 4px 4px #00000040;
@@ -172,7 +173,7 @@
     text-transform: uppercase;
   }
   .modal-header__text {
-    color: $text-gray;
+    color: --modal-text-color;
 
     @media screen and (min-width: $tablet) {
       overflow: auto;
@@ -181,7 +182,7 @@
   }
 
   .content__text {
-    color: $text-gray;
+    color: var(--modal-text-color);
     @media screen and (min-width: $tablet) {
       overflow: auto;
       max-height: calc(100vh - 445px);
@@ -190,7 +191,7 @@
   .modal-header__list,
   .content__list {
     line-height: 1.62;
-    color: $text-gray;
+    color: var(--modal-text-color);
   }
   .content__item {
     line-height: 1.62;

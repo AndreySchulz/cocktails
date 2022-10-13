@@ -137,11 +137,11 @@
   gap: 14px;
   width: 93px;
   border: 1px solid $main-orange;
+  color: $text-gray;
 
   border-radius: 4px;
   margin-bottom: 40px;
   background-color: var(--bg-color);
-  display: none;
   position: absolute;
   right: 50%;
   transform: translateX(50%);
@@ -149,14 +149,26 @@
 .select__header {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin: 0 auto;
-  padding: 10px;
+  padding: 5px 8px 5px 10px;
   gap: 14px;
   width: 93px;
   border: 1px solid $main-orange;
   color: $main-orange;
   border-radius: 4px;
   background-color: var(--bg-color);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.35;
+
+  &.is-active {
+    background-color: $main-orange;
+    color: $bg-light;
+    & .select__icon {
+      fill: $bg-light;
+    }
+  }
 }
 
 .hero__picture {
@@ -176,4 +188,8 @@
     right: 0;
     top: -20%;
   }
+}
+
+.select__icon {
+  fill: $main-orange;
 }

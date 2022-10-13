@@ -1,3 +1,4 @@
+import { enableScroll } from './mobile-nav';
 const gallery = document.querySelector('#gallery');
 const modalCocktailBackDrop = document.querySelector('#modal-cocktail');
 
@@ -9,7 +10,7 @@ function createOnClickForModal(addToFavorites, removeFromFavorites) {
         modalCocktailBackDrop == backDrop ||
         modalCocktailBackDrop.classList.contains('is-hidden')
       ) {
-        document.body.style.overflow = '';
+        enableScroll();
       }
       backDrop.classList.add('is-hidden');
       return;
@@ -21,7 +22,7 @@ function createOnClickForModal(addToFavorites, removeFromFavorites) {
         modalCocktailBackDrop == backDrop ||
         modalCocktailBackDrop.classList.contains('is-hidden')
       ) {
-        document.body.style.overflow = '';
+        enableScroll();
       }
       backDrop.classList.add('is-hidden');
       return;

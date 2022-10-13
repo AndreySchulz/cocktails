@@ -6,6 +6,7 @@ import {
 } from './favorites';
 import { createOnClickForModal } from './modal';
 import { searchIngredientByName, searchById } from './helpers/api';
+import { disableScroll, enableScroll } from './mobile-nav';
 
 const modalIngredientContent = document.querySelector(
   '.modal-ingredient__content'
@@ -43,8 +44,7 @@ async function renderIngredientCard(ingredient) {
     `;
   modalIngredientContent.innerHTML = markup;
   backDrop.classList.remove('is-hidden');
-  document.body.style.overflow = 'hidden';
-  // modalIngredientContent.style.overflow = 'auto';
+  disableScroll();
 }
 
 function getIngredientsMarkup(ingredients) {
