@@ -129,7 +129,12 @@
     display: none;
   }
 }
-
+.mobile-favorite {
+  margin-left: 8px;
+  @media screen and(min-width:$desktop) {
+    display: none;
+  }
+}
 .header__search {
   display: flex;
 
