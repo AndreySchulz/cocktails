@@ -59,16 +59,23 @@ export const getAlphabetMarkup = targetElements => {
   //   targetElement.innerHTML = template.join('');
   //   targetElement.innerHTML = template.join('');
 };
+const isMobile = () => {
+  if (window.innerWidth >= 767) return true;
+  return false;
+};
 
-export const getDrinksMarkup = drinks => {
+export function getDrinksMarkup(drinks) {
+  const isMobileValue = isMobile();
+  const width = isMobileValue ? '280' : '345';
+  const height = isMobileValue ? '308' : '380';
   const template = drinks.map(({ idDrink, strDrink, strDrinkThumb }) => {
     return /*html*/ `
     <li class="gallery__item">
-      <img class="gallery__img" src="${strDrinkThumb}" alt="${strDrink}"/>
+      <img class="gallery__img" src="${strDrinkThumb}" alt="${strDrink}" width="${width}" height="${height}"/>
       <div class="gallery__box">
         <h3 class="gallery__text">${strDrink}</h3>
         <div class="gallery__box-btn">
-          <button id="${idDrink}" class="gallery__button" data-details>Learn more</button>
+          <button data-id="${idDrink}" class="gallery__button" data-details>Learn more</button>
          
           ${getCocktailFavoriteBtn(idDrink)} 
 
@@ -77,4 +84,4 @@ export const getDrinksMarkup = drinks => {
     </li>`;
   });
   return template;
-};
+}

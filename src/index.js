@@ -108,7 +108,7 @@ async function paginateCocktails(getData, params) {
   const resultData = await getData(params);
   let cocktailsPerPage = 3;
 
-  if (window.innerWidth > 767 && window.innerWidth < 1280) {
+  if (window.innerWidth >= 767 && window.innerWidth < 1280) {
     cocktailsPerPage = 6;
   } else if (window.innerWidth > 1279) {
     cocktailsPerPage = 9;

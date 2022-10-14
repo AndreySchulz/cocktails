@@ -43,32 +43,40 @@ function createOnClickForModal(addToFavorites, removeFromFavorites) {
 
     const addFavoriteBtn = event.target.closest('[data-add-favorite]');
     if (addFavoriteBtn) {
-      addToFavorites(addFavoriteBtn.id);
+      addToFavorites(addFavoriteBtn.dataset.id);
       addFavoriteBtn.classList.add('is-hidden');
       addFavoriteBtn.parentNode
         .querySelector('[data-remove-favorite]')
         .classList.remove('is-hidden');
 
       el.gallery
-        .querySelector(`[id='${addFavoriteBtn.id}'][data-add-favorite]`)
+        .querySelector(
+          `[data-id='${addFavoriteBtn.dataset.id}'][data-add-favorite]`
+        )
         ?.classList.add('is-hidden');
       el.gallery
-        .querySelector(`[id='${addFavoriteBtn.id}'][data-remove-favorite]`)
+        .querySelector(
+          `[data-id='${addFavoriteBtn.dataset.id}'][data-remove-favorite]`
+        )
         ?.classList.remove('is-hidden');
     }
     const removeFavoriteBtn = event.target.closest('[data-remove-favorite]');
     if (removeFavoriteBtn) {
-      removeFromFavorites(removeFavoriteBtn.id);
+      removeFromFavorites(removeFavoriteBtn.dataset.id);
       removeFavoriteBtn.classList.add('is-hidden');
       removeFavoriteBtn.parentNode
         .querySelector('[data-add-favorite]')
         .classList.remove('is-hidden');
 
       el.gallery
-        .querySelector(`[id='${removeFavoriteBtn.id}'][data-add-favorite]`)
+        .querySelector(
+          `[data-id='${removeFavoriteBtn.dataset.id}'][data-add-favorite]`
+        )
         ?.classList.remove('is-hidden');
       el.gallery
-        .querySelector(`[id='${removeFavoriteBtn.id}'][data-remove-favorite]`)
+        .querySelector(
+          `[data-id='${removeFavoriteBtn.dataset.id}'][data-remove-favorite]`
+        )
         ?.classList.add('is-hidden');
     }
   };

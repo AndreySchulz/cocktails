@@ -104,28 +104,28 @@ function saveThemeFavorites(theme) {
 
 function getFavoriteBtn(favoriteKey, id) {
   return isFavorites(favoriteKey, id)
-    ? /*html*/ `<button id="${id}" class="gallery__favorite" data-remove-favorite>
+    ? /*html*/ `<button data-id="${id}" class="gallery__favorite" data-remove-favorite>
       Remove ${galleryIconBtn.outerHTML}
-      </button><button id="${id}" class="gallery__favorite is-hidden" data-add-favorite>
+      </button><button data-id="${id}" class="gallery__favorite is-hidden" data-add-favorite>
       Add to ${galleryIconBtn.outerHTML}
       </button>`
-    : /*html*/ `<button id="${id}" class="gallery__favorite" data-add-favorite>
+    : /*html*/ `<button data-id="${id}" class="gallery__favorite" data-add-favorite>
       Add to ${galleryIconBtn.outerHTML}
-      </button><button id="${id}" class="gallery__favorite is-hidden" data-remove-favorite>
+      </button><button data-id="${id}" class="gallery__favorite is-hidden" data-remove-favorite>
       Remove ${galleryIconBtn.outerHTML}
       </button>`;
 }
 
 function getModalFavoriteBtn(favoriteKey, id) {
   return isFavorites(favoriteKey, id)
-    ? /*html*/ `<button id="${id}" class="gallery__modal-button" data-remove-favorite>
+    ? /*html*/ `<button data-id="${id}" class="gallery__modal-button" data-remove-favorite>
       Remove from favorite
-      </button><button id="${id}" class="gallery__modal-button is-hidden" data-add-favorite>
+      </button><button data-id="${id}" class="gallery__modal-button is-hidden" data-add-favorite>
       Add to favorite 
       </button>`
-    : /*html*/ `<button id="${id}" class="gallery__modal-button" data-add-favorite>
+    : /*html*/ `<button data-id="${id}" class="gallery__modal-button" data-add-favorite>
       Add to favorite
-      </button><button id="${id}" class="gallery__modal-button is-hidden" data-remove-favorite>
+      </button><button data-id="${id}" class="gallery__modal-button is-hidden" data-remove-favorite>
       Remove from favorite
       </button>`;
 }
