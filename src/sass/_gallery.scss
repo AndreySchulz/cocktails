@@ -26,11 +26,41 @@
 
 .gallery__list {
   display: flex;
-  flex-wrap: wrap;
   gap: 32px;
+  // flex-wrap: wrap;
+  // justify-content: center;
+
+  @media screen and (max-width: $tablet) {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: $tablet) {
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+}
+
+.gallery__card-width {
+  align-items: center;
+  border: 1px solid $main-orange;
+  border-radius: 4px;
+  width: 280px;
+  // margin-bottom: 20px;
+  margin: 10px 10px;
+
+  @media screen and (min-width: $tablet) {
+    width: 336px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 395px;
+  }
 }
 
 .gallery__item {
+  max-width: 345px;
   align-items: center;
   border: 1px solid $main-orange;
   border-radius: 4px;
@@ -76,7 +106,7 @@
 }
 
 .gallery__text {
-font-family: 'Roboto';
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 900;
   text-align: center;
@@ -210,7 +240,7 @@ font-family: 'Roboto';
   padding: 28px 0 28px 28px;
 }
 
-.content__text{
+.content__text {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
@@ -219,26 +249,25 @@ font-family: 'Roboto';
   padding: 28px 33px 28px 28px;
 }
 
-.content__list{
+.content__list {
   margin-top: 28px;
   padding-left: 28px;
 }
 
 .content__box {
-  
-    @media screen and (max-width: $tablet) {
-        padding: 0 20px 20px 20px;
-    }
+  @media screen and (max-width: $tablet) {
+    padding: 0 20px 20px 20px;
+  }
 
-    @media screen and(min-width: $tablet) {
-            display: flex;
-        padding: 0 20px 20px 20px;
-    }
+  @media screen and(min-width: $tablet) {
+    display: flex;
+    padding: 0 20px 20px 20px;
+  }
 
-    @media screen and(min-width: $desktop) {
-            display: flex;
-        padding: 0 28px 26px 28px;
-    }
+  @media screen and(min-width: $desktop) {
+    display: flex;
+    padding: 0 28px 26px 28px;
+  }
 }
 
 .gallery__heart {
@@ -259,18 +288,4 @@ font-family: 'Roboto';
     width: 21px;
     height: 19px;
   }
-}
-
-.gallery__card-width{
-    @media screen and (max-width: $tablet) {
-        min-width: 280px;
-    }
-    
-    @media screen and(min-width: $tablet) {
-        width: 336px;
-    }
-    
-    @media screen and(min-width: $desktop) {
-        width: 395px;
-    }
 }
