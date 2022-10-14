@@ -13,8 +13,8 @@ export async function clickGallery(event) {
   const addBtn = event.target.closest('[data-add-favorite]');
   if (addBtn) {
     addBtn.closest('[data-ingredient-btns]')
-      ? addIngredientsFavorites(addBtn.id)
-      : addCocktailToFavorites(addBtn.id);
+      ? addIngredientsFavorites(addBtn.dataset.id)
+      : addCocktailToFavorites(addBtn.dataset.id);
     addBtn.classList.add('is-hidden');
     addBtn.parentNode
       .querySelector('[data-remove-favorite]')
@@ -23,8 +23,8 @@ export async function clickGallery(event) {
   const removeBtn = event.target.closest('[data-remove-favorite]');
   if (removeBtn) {
     removeBtn.closest('[data-ingredient-btns]')
-      ? removeIngredientsFromFavorites(removeBtn.id)
-      : removeCocktailFromFavorites(removeBtn.id);
+      ? removeIngredientsFromFavorites(removeBtn.dataset.id)
+      : removeCocktailFromFavorites(removeBtn.dataset.id);
     removeBtn.classList.add('is-hidden');
     removeBtn.parentNode
       .querySelector('[data-add-favorite]')
@@ -32,12 +32,12 @@ export async function clickGallery(event) {
   }
   const detailsBtn = event.target.closest('[data-details]');
   if (detailsBtn) {
-    await renderCocktailCard(detailsBtn.id);
+    await renderCocktailCard(detailsBtn.dataset.id);
   }
   const detailsIngredientBtn = event.target.closest(
     '[data-ingredient-details]'
   );
   if (detailsIngredientBtn) {
-    await renderIngredientCard(detailsIngredientBtn.id);
+    await renderIngredientCard(detailsIngredientBtn.dataset.id);
   }
 }
