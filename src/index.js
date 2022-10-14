@@ -148,9 +148,9 @@ function onScroll() {
 }
 
 const handleScroll = async () => {
-  const { height: cardHeight = 0 } = el.gallery
+  const { height: cardHeight } = el.gallery
     .querySelector('.gallery__item')
-    ?.getBoundingClientRect();
+    ?.getBoundingClientRect() || { height: 0 };
   const endOfPage =
     window.innerHeight + window.pageYOffset + cardHeight >=
     document.body.offsetHeight;

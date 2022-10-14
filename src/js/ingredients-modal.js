@@ -49,7 +49,7 @@ async function renderIngredientCard(ingredient) {
 function getIngredientsMarkup(ingredients) {
   return ingredients.map(
     ({ idIngredient, strIngredient, strType }) => /*html*/ `
-    <li class="gallery__item">
+    <li class="gallery__card-width">
       <h2 class="content__title">${strIngredient}</h2>
       <h3 class="content__subtitle">${strType || 'None'}</h3>
       <div class="content__box" data-ingredient-btns>
