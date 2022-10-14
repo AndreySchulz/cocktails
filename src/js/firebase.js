@@ -32,17 +32,16 @@ export function onAuthClickCreate(boxAuthBtn) {
     if (event.target.id == 'authBtn') {
       const auth = getAuth();
       auth.languageCode = 'ua';
-      
+
       if (!auth.currentUser) {
         signInWithPopup(auth, provider)
           .then(result => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            console.log('token :>> ', token);
+            //const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
-            
+
             renderUser(user, event.target, boxAuthBtn);
             // ...
           })
@@ -78,7 +77,6 @@ const boxAuthBtn = document.querySelector('#authBtnLog');
 
 const auth = getAuth(app);
 onAuthStateChanged(auth, user => {
-  console.log(user);
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User

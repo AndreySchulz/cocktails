@@ -52,6 +52,7 @@
 }
 
 .header__link {
+  position: relative;
   font-size: 28px;
   line-height: 0.86;
   letter-spacing: 0.02em;
@@ -130,6 +131,9 @@
   }
 }
 .mobile-favorite {
+  position: absolute;
+  bottom: 4px;
+  fill: var(--bg-text);
   margin-left: 8px;
   @media screen and(min-width:$desktop) {
     display: none;

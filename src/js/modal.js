@@ -1,14 +1,27 @@
 import { enableScroll } from './mobile-nav';
-const gallery = document.querySelector('#gallery');
-const modalCocktailBackDrop = document.querySelector('#modal-cocktail');
+import { elements as el } from './elements';
+
+document.documentElement.addEventListener('keydown', event => {
+  if (event.code === 'Escape') {
+    if (!el.backDropModalIngredients.classList.contains('is-hidden')) {
+      el.backDropModalIngredients.classList.add('is-hidden');
+      if (el.modalCocktailBackDrop.classList.contains('is-hidden')) {
+        enableScroll();
+      }
+    } else if (!el.modalCocktailBackDrop.classList.contains('is-hidden')) {
+      el.modalCocktailBackDrop.classList.add('is-hidden');
+      enableScroll();
+    }
+  }
+});
 
 function createOnClickForModal(addToFavorites, removeFromFavorites) {
   return async function (event) {
     const backDrop = event.currentTarget;
     if (event.target == backDrop) {
       if (
-        modalCocktailBackDrop == backDrop ||
-        modalCocktailBackDrop.classList.contains('is-hidden')
+        el.modalCocktailBackDrop == backDrop ||
+        el.modalCocktailBackDrop.classList.contains('is-hidden')
       ) {
         enableScroll();
       }
@@ -19,8 +32,8 @@ function createOnClickForModal(addToFavorites, removeFromFavorites) {
     const closeBtn = event.target.closest('[data-modal-close]');
     if (closeBtn) {
       if (
-        modalCocktailBackDrop == backDrop ||
-        modalCocktailBackDrop.classList.contains('is-hidden')
+        el.modalCocktailBackDrop == backDrop ||
+        el.modalCocktailBackDrop.classList.contains('is-hidden')
       ) {
         enableScroll();
       }
@@ -36,10 +49,10 @@ function createOnClickForModal(addToFavorites, removeFromFavorites) {
         .querySelector('[data-remove-favorite]')
         .classList.remove('is-hidden');
 
-      gallery
+      el.gallery
         .querySelector(`[id='${addFavoriteBtn.id}'][data-add-favorite]`)
         ?.classList.add('is-hidden');
-      gallery
+      el.gallery
         .querySelector(`[id='${addFavoriteBtn.id}'][data-remove-favorite]`)
         ?.classList.remove('is-hidden');
     }
@@ -51,10 +64,10 @@ function createOnClickForModal(addToFavorites, removeFromFavorites) {
         .querySelector('[data-add-favorite]')
         .classList.remove('is-hidden');
 
-      gallery
+      el.gallery
         .querySelector(`[id='${removeFavoriteBtn.id}'][data-add-favorite]`)
         ?.classList.remove('is-hidden');
-      gallery
+      el.gallery
         .querySelector(`[id='${removeFavoriteBtn.id}'][data-remove-favorite]`)
         ?.classList.add('is-hidden');
     }

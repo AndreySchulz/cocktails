@@ -16,11 +16,9 @@ const galleryIconBtn = document.querySelector('.gallery__icon-btn');
 galleryIconBtn.remove();
 galleryIconBtn.style.display = '';
 
-console.log(Cache);
 let userId;
 const auth = getAuth(app);
 onAuthStateChanged(auth, user => {
-  console.log(user);
   if (user) {
     userId = user.uid;
     onReadData(FAVORITE_COCTAILS_KEY);
@@ -41,7 +39,6 @@ function onReadData(favoriteKey) {
   const starCountRef = ref(db, `${userId}/${favoriteKey}`);
   onValue(starCountRef, snapshot => {
     const data = snapshot.val();
-    console.log('on value', data);
     Cache[favoriteKey] = data;
   });
 }
@@ -165,7 +162,7 @@ function removeFromFavorites(favoriteKey, id) {
   favorites.splice(index, 1);
   Cache[favoriteKey] = favorites;
   localStorage.setItem(favoriteKey, JSON.stringify(Cache[favoriteKey]));
-  writeFavoriteData(Cache[favoriteKey]);
+  writeFavoriteData(favoriteKey, Cache[favoriteKey]);
 }
 
 function removeCocktailFromFavorites(id) {
